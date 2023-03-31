@@ -27,6 +27,12 @@
     <ClCompile Include="Memory\src\Memory.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="Memory\src\MemoryUtils.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory\src\Signature.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Jobs\include\JobsHandler.h">
@@ -39,6 +45,12 @@
       <Filter>File di intestazione</Filter>
     </ClInclude>
     <ClInclude Include="Memory\include\Memory.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\include\MemoryUtils.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\include\Signature.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
   </ItemGroup>

@@ -56,7 +56,7 @@ namespace Dumper
 		}
 
 		/// <summary>
-		/// Convert int values to hex strings inside a json table. (beautification purpose)
+		/// Convert uintptr_t values to hex strings inside a json table. (beautification purpose)
 		/// </summary>
 		void int2hex_json(json& table)
 		{

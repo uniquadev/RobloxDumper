@@ -165,12 +165,16 @@
     <ClCompile Include="Jobs\src\JobsHandler.cpp" />
     <ClCompile Include="Jobs\src\TaskScheduler.cpp" />
     <ClCompile Include="Memory\src\Memory.cpp" />
+    <ClCompile Include="Memory\src\MemoryUtils.cpp" />
+    <ClCompile Include="Memory\src\Signature.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\include\Libs\Json.hpp" />
     <ClInclude Include="Jobs\include\Jobs.h" />
     <ClInclude Include="Jobs\include\JobsHandler.h" />
     <ClInclude Include="Memory\include\Memory.h" />
+    <ClInclude Include="Memory\include\MemoryUtils.h" />
+    <ClInclude Include="Memory\include\Signature.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

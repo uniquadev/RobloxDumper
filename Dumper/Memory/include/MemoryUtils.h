@@ -1,0 +1,48 @@
+#pragma once
+
+#include <windows.h>
+#include <string>
+#include <vector>
+#include <stdint.h>
+
+#include "Signature.h"
+
+namespace Dumper::Memory
+{
+	/// <summary>
+	/// Subtract RobloxBase from passed addressed returing it's offset.
+	/// </summary>
+	uintptr_t get_offset(uintptr_t addr);
+	/// <summary>
+	/// Search all refs to the given address in the process memory.
+	/// </summary>
+	/// <returns></returns>
+	std::vector<uintptr_t> get_xrefs(uintptr_t addr, HMODULE base, bool stop_first, DWORD protect);
+	std::vector<uintptr_t> get_xrefs(uintptr_t addr, bool stop_first = true, DWORD protect = PAGE_EXECUTE_READ);
+	/// <summary>
+	/// Search string in the read+write regions of the process, return its address.
+	/// </summary>
+	/// <returns></returns>
+	std::vector<uintptr_t> find_string(const char* str, bool stop_first = true, DWORD protect = PAGE_READONLY);
+	/// <summary>
+	/// Return the address of the first 0xE8 byte
+	/// </summary>
+	/// <returns></returns>
+	uintptr_t next_call(uintptr_t addr, size_t skips = 0);
+	uintptr_t get_calling(uintptr_t call_add);
+	/// <summary>
+	/// Scan post addr memory until function prologue ops are matched
+	/// </summary>
+	/// <returns></returns>
+	uintptr_t get_func_top(uintptr_t addr);
+	/// <summary>
+	/// Scan pre addr memory until function epilogue ops are matched
+	///	</summary>
+	uintptr_t get_func_end(uintptr_t addr);
+	/// <summary>
+	/// Scan the process memory to find the passed signature
+	/// </summary>
+	/// <returns></returns>
+	std::vector<uintptr_t> scan(std::string ida_sign, uintptr_t from = 0, bool stop_first = true, uintptr_t end = 0);
+	std::vector<uintptr_t> scan(Signature sign, uintptr_t from = 0, bool stop_first = true, uintptr_t end = 0);
+}
