@@ -9,6 +9,17 @@
 
 namespace Dumper::Memory
 {
+	class SearchSettings
+	{
+	public:
+		uintptr_t start;
+		uintptr_t end;
+		DWORD protect;
+		bool stop_first;
+		SearchSettings(uintptr_t start, uintptr_t end, DWORD protect, bool stop_first)
+			: start(start), end(end), protect(protect), stop_first(stop_first) {
+		}
+	};
 	/// <summary>
 	/// Subtract RobloxBase from passed addressed returing it's offset.
 	/// </summary>
@@ -17,13 +28,14 @@ namespace Dumper::Memory
 	/// Search all refs to the given address in the process memory.
 	/// </summary>
 	/// <returns></returns>
-	std::vector<uintptr_t> get_xrefs(uintptr_t addr, HMODULE base, bool stop_first, DWORD protect);
-	std::vector<uintptr_t> get_xrefs(uintptr_t addr, bool stop_first = true, DWORD protect = PAGE_EXECUTE_READ);
+	std::vector<uintptr_t> get_xrefs(uintptr_t addr, SearchSettings settings);
+	__forceinline std::vector<uintptr_t> get_xrefs(uintptr_t addr);
 	/// <summary>
 	/// Search string in the read+write regions of the process, return its address.
 	/// </summary>
 	/// <returns></returns>
-	std::vector<uintptr_t> find_string(const char* str, bool stop_first = true, DWORD protect = PAGE_READONLY);
+	std::vector<uintptr_t> find_string(const char* str, SearchSettings settings);
+	__forceinline std::vector<uintptr_t> find_string(const char* str);
 	/// <summary>
 	/// Return the address of the first 0xE8 byte
 	/// </summary>
@@ -43,6 +55,6 @@ namespace Dumper::Memory
 	/// Scan the process memory to find the passed signature
 	/// </summary>
 	/// <returns></returns>
-	std::vector<uintptr_t> scan(std::string ida_sign, uintptr_t from = 0, bool stop_first = true, uintptr_t end = 0);
-	std::vector<uintptr_t> scan(Signature sign, uintptr_t from = 0, bool stop_first = true, uintptr_t end = 0);
+	std::vector<uintptr_t> scan(std::string sign, SearchSettings settings);
+	std::vector<uintptr_t> scan(Signature sign, SearchSettings settings);
 }
