@@ -166,7 +166,6 @@
     <ClCompile Include="Jobs\src\TaskScheduler.cpp" />
     <ClCompile Include="Memory\src\Memory.cpp" />
     <ClCompile Include="Memory\src\MemoryUtils.cpp" />
-    <ClCompile Include="Memory\src\Signature.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\include\Libs\Json.hpp" />

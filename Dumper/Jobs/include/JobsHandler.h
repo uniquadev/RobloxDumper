@@ -35,6 +35,15 @@ namespace Dumper
 			{"Errors", json::array()}
 		};
 
+		void push_addy(std::string name, uintptr_t addy)
+		{
+			output["Addys"][name] = addy;
+		}
+		void push_offset(std::string name, uintptr_t offset)
+		{
+			output["Offsets"][name] = offset;
+		}
+
 		bool run()
 		{
 			std::clock_t started_at = std::clock();
