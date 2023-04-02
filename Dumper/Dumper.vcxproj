@@ -163,6 +163,7 @@
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Jobs\src\JobsHandler.cpp" />
+    <ClCompile Include="Jobs\src\Misc.cpp" />
     <ClCompile Include="Jobs\src\TaskScheduler.cpp" />
     <ClCompile Include="Memory\src\Memory.cpp" />
     <ClCompile Include="Memory\src\MemoryUtils.cpp" />

@@ -6,3 +6,4 @@
 #define JOBERROR(h, x) { h->output["Errors"].push_back(x); return false; }
 
 DEFINE_JOB(taskscheduler);
+DEFINE_JOB(misc);
