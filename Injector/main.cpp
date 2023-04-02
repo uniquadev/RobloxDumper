@@ -19,6 +19,7 @@ __forceinline DWORD InjectLL(const HANDLE Proc, const std::string Path)
 	DWORD ExitCode = 0;
 	GetExitCodeThread(Thread, &ExitCode);
 	CloseHandle(Thread);
+	VirtualFreeEx(Proc, Loc, 0, MEM_RELEASE);
 
 	return ExitCode;
 }
