@@ -39,6 +39,18 @@ std::vector<MEMORY_BASIC_INFORMATION> Dumper::Memory::get_regions(uintptr_t addr
         if (mbi.State == MEM_COMMIT && (mbi.Protect & protect))
             res.push_back(mbi);
     }
+    
+    if (res.size() > 1 && (uintptr_t)res[0].BaseAddress < addr)
+    {
+        auto region = res[0];
+        // adjust first region to start from addr
+        uintptr_t base = (uintptr_t)region.BaseAddress;
+        auto size = region.RegionSize;
+
+        region.BaseAddress = (PVOID)addr;
+        region.RegionSize = (base + size) - addr;
+    }
+
     return res;
 }
 

@@ -15,7 +15,7 @@ bool dump_taskscheduler(JobsHandler* h)
 	if (func_sign.size() < 1)
 		JOBERROR(h, "Failed to find taskscheduler caller signature");
 	
-	// first call is taskscheduler grabber
+	// first call is taskscheduler getter
 	uintptr_t call = next_call(func_sign[0]);
 	if (!call)
 		JOBERROR(h, "Failed to find taskscheduler grabber call");
