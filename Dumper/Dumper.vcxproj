@@ -166,12 +166,14 @@
     <ClCompile Include="Jobs\src\TypeName.cpp" />
     <ClCompile Include="Jobs\src\Misc.cpp" />
     <ClCompile Include="Jobs\src\TaskScheduler.cpp" />
+    <ClCompile Include="Jobs\src\VMLoad.cpp" />
     <ClCompile Include="Memory\src\Memory.cpp" />
     <ClCompile Include="Memory\src\MemoryUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\include\Libs\Json.hpp" />
     <ClInclude Include="Jobs\include\Jobs.h" />
+    <ClInclude Include="Jobs\include\JobsData.h" />
     <ClInclude Include="Jobs\include\JobsHandler.h" />
     <ClInclude Include="Memory\include\Memory.h" />
     <ClInclude Include="Memory\include\MemoryUtils.h" />

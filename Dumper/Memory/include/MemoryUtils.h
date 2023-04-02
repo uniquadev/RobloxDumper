@@ -16,8 +16,9 @@ namespace Dumper::Memory
 		uintptr_t end;
 		DWORD protect;
 		bool stop_first;
-		SearchSettings(uintptr_t start, uintptr_t end, DWORD protect, bool stop_first)
-			: start(start), end(end), protect(protect), stop_first(stop_first) {
+		bool fast_scan;
+		SearchSettings(uintptr_t start, uintptr_t end, DWORD protect, bool stop_first, bool fast_scan)
+			: start(start), end(end), protect(protect), stop_first(stop_first), fast_scan(fast_scan) {
 		}
 	};
 	/// <summary>
@@ -29,13 +30,13 @@ namespace Dumper::Memory
 	/// </summary>
 	/// <returns></returns>
 	std::vector<uintptr_t> get_xrefs(uintptr_t addr, SearchSettings settings);
-	__forceinline std::vector<uintptr_t> get_xrefs(uintptr_t addr);
+	std::vector<uintptr_t> get_xrefs(uintptr_t addr);
 	/// <summary>
 	/// Search string in the read+write regions of the process, return its address.
 	/// </summary>
 	/// <returns></returns>
 	std::vector<uintptr_t> find_string(const char* str, SearchSettings settings);
-	__forceinline std::vector<uintptr_t> find_string(const char* str);
+	std::vector<uintptr_t> find_string(const char* str);
 	/// <summary>
 	/// Return the address of the first 0xE8 byte
 	/// </summary>

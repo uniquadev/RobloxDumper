@@ -1,7 +1,9 @@
 #include "Memory.h"
 
+#include <string>
 #include <stdexcept>
 #include <Psapi.h>
+#include <dbghelp.h>
 
 void Dumper::Memory::init()
 {
@@ -9,6 +11,34 @@ void Dumper::Memory::init()
     r_process = GetCurrentProcess();
     r_module = reinterpret_cast<uintptr_t>(GetModuleHandleA(NULL));
 	
+    PIMAGE_NT_HEADERS nt_header = ImageNtHeader((PVOID)r_module);
+    WORD nsections = nt_header->FileHeader.NumberOfSections;
+    PIMAGE_SECTION_HEADER section = IMAGE_FIRST_SECTION(nt_header);
+    size_t total_size = 0;
+    for (WORD i = 0; i < nsections; i++)
+    {
+        std::string name = (char*)&section->Name;
+        if (name == ".text")
+        {
+            r_text_start = r_module + section->VirtualAddress;
+            r_text_end = r_text_start + section->Misc.VirtualSize;
+        }
+        else if (name == ".rdata")
+        {
+            r_rdata_start = r_module + section->VirtualAddress;
+            r_rdata_end = r_rdata_start + section->Misc.VirtualSize;
+        }
+        else if (name == ".data")
+        {
+            r_data_start = r_module + section->VirtualAddress;
+            r_data_end = r_data_start + section->Misc.VirtualSize;
+        }
+        total_size += section->Misc.VirtualSize;
+        section++;
+    }
+    r_roblox_end = r_module + total_size;
+
+    size_t r_size;
     LPMODULEINFO r_info = new MODULEINFO();
     if (GetModuleInformation(r_process, (HMODULE)r_module, r_info, sizeof(MODULEINFO)) != 0)
         r_size = r_info->SizeOfImage;
@@ -47,8 +77,8 @@ std::vector<MEMORY_BASIC_INFORMATION> Dumper::Memory::get_regions(uintptr_t addr
         uintptr_t base = (uintptr_t)region.BaseAddress;
         auto size = region.RegionSize;
 
-        region.BaseAddress = (PVOID)addr;
-        region.RegionSize = (base + size) - addr;
+        res[0].BaseAddress = (PVOID)addr;
+        res[0].RegionSize = (base + size) - addr;
     }
 
     return res;

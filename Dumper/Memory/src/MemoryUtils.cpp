@@ -11,13 +11,14 @@ uintptr_t Dumper::Memory::get_offset(uintptr_t addr)
 
 std::vector<uintptr_t> Dumper::Memory::get_xrefs(uintptr_t addr)
 {
-    return get_xrefs(addr, SearchSettings(r_module, r_module_end, PAGE_EXECUTE_READ, true));
+    return get_xrefs(addr, SearchSettings(r_module, r_module_end, PAGE_EXECUTE_READ, true, false));
 }
 
 std::vector<uintptr_t> Dumper::Memory::get_xrefs(uintptr_t addr, SearchSettings settings)
 {
 	auto res = std::vector<uintptr_t>();
-	auto regions = get_regions(settings.start, settings.end);
+	auto regions = get_regions(settings.start, settings.protect);
+	auto step = settings.fast_scan ? sizeof(uintptr_t) : 1;
 
 	for (auto& region : regions)
 	{
@@ -25,7 +26,7 @@ std::vector<uintptr_t> Dumper::Memory::get_xrefs(uintptr_t addr, SearchSettings 
 		VirtualProtect(region.BaseAddress, region.RegionSize, PAGE_EXECUTE_READWRITE, &OldProtect);
 		const uintptr_t base = reinterpret_cast<uintptr_t>(region.BaseAddress);
 		
-		for (size_t i = 0; i < region.RegionSize - sizeof(uintptr_t); i++)
+		for (size_t i = 0; i < region.RegionSize; i += step)
 		{
 			if (*(uintptr_t*)(base + i) == addr)
 			{
@@ -46,6 +47,8 @@ std::vector<uintptr_t> Dumper::Memory::find_string(const char* str, SearchSettin
 {
 	auto res = std::vector<uintptr_t>();
 	auto regions = get_regions(settings.start, settings.protect);
+	auto size = strlen(str);
+	auto step = settings.fast_scan ? sizeof(char*) : 1;
 	
 	for (auto& region : regions)
 	{
@@ -53,9 +56,10 @@ std::vector<uintptr_t> Dumper::Memory::find_string(const char* str, SearchSettin
 		VirtualProtect(region.BaseAddress, region.RegionSize, PAGE_EXECUTE_READWRITE, &OldProtect);
 		const uintptr_t base = reinterpret_cast<uintptr_t>(region.BaseAddress);
 		
-		for (size_t i = 0; i < region.RegionSize - sizeof(char*); i += sizeof(char*))
+		for (size_t i = 0; i < region.RegionSize - sizeof(char*); i += step)
 		{
-			if (strcmp((char*)(base + i), str) == 0)
+			auto mstr = (const char*)(base + i);
+			if (strncmp(mstr, str, size) == 0)
 			{
 				res.push_back(base + i);
 				if (settings.stop_first)
@@ -72,7 +76,7 @@ std::vector<uintptr_t> Dumper::Memory::find_string(const char* str, SearchSettin
 
 std::vector<uintptr_t> Dumper::Memory::find_string(const char* str)
 {
-	return find_string(str, SearchSettings(r_module, r_module_end, PAGE_READONLY, true));
+	return find_string(str, SearchSettings(r_module, r_module_end, PAGE_READONLY, true, true));
 }
 
 uintptr_t Dumper::Memory::next_call(uintptr_t addr, size_t skips)
@@ -126,7 +130,7 @@ uintptr_t Dumper::Memory::get_func_top(uintptr_t addr)
 
 uintptr_t Dumper::Memory::get_func_end(uintptr_t addr)
 {
-	const BYTE epil[] = { 0x5B, 0x8B, 0xE5, 0x5D, 0x8B, 0xE3, 0x5B }; // epilogue
+	const BYTE epil[] = { 0x5B, 0x8B, 0xE5, 0x5D, 0x8B, 0xE3 }; // epilogue
 	
 	// get current region
 	auto region = get_region(addr);
@@ -159,7 +163,7 @@ std::vector<uintptr_t> Dumper::Memory::scan(Signature sign, SearchSettings setti
 		VirtualProtect(region.BaseAddress, region.RegionSize, PAGE_EXECUTE_READWRITE, &OldProtect);
 		const uintptr_t base = reinterpret_cast<uintptr_t>(region.BaseAddress);
 
-		for (size_t i = 0; i < region.RegionSize - sign.sign.size(); i++)
+		for (size_t i = 0; i < region.RegionSize; i++)
 		{
 			if (sign.compare((void*)(base + i)) )
 			{

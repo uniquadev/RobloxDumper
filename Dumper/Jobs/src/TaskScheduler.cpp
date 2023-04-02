@@ -6,7 +6,7 @@ using namespace Memory;
 
 bool dump_taskscheduler(JobsHandler* h)
 {
-	const auto settings = SearchSettings(r_module, r_module_end, PAGE_EXECUTE_READ, true);
+	const auto settings = SearchSettings(r_text_start, r_text_end, PAGE_EXECUTE_READ, true, true);
 	// find taskscheduler func
 	auto func_sign = scan(
 		"55 8B EC 83 E4 F8 83 EC 08 E8 ?? ?? ?? ?? 8D 0C 24",
@@ -27,7 +27,7 @@ bool dump_taskscheduler(JobsHandler* h)
 	h->push_addy("GetTaskScheduler", get_offset(taskscheduler));
 	
 	// find singleton offset
-	const auto settings2 = SearchSettings(taskscheduler, taskscheduler + 300, PAGE_EXECUTE_READ, true);
+	const auto settings2 = SearchSettings(taskscheduler, taskscheduler + 300, PAGE_EXECUTE_READ, true, true);
 	auto ret_sign = scan(
 		"A1 ? ? ? ? 8B 4D F4 64 89 0D ? ? ? ? 8B E5 5D C3",
 		settings2

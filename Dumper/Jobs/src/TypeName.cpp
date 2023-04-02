@@ -4,11 +4,16 @@
 using namespace Dumper;
 using namespace Memory;
 
+
+/*
+*	Another way could be searching for "no value" string and xref it to get inside typename
+*/
+
 bool dump_ltypename(JobsHandler* h)
 {
 	auto typename_sign = scan(
 		"B8 ? ? ? ? 83 ? FF 74 07 8B 04 95",
-		SearchSettings(r_module, r_module_end, PAGE_EXECUTE_READ, true)
+		SearchSettings(r_text_start, r_text_end, PAGE_EXECUTE_READ, true, true)
 	);
 
 	if (typename_sign.size() < 1)

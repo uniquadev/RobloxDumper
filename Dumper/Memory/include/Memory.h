@@ -11,7 +11,14 @@ namespace Dumper::Memory
 	
 	inline uintptr_t r_module;
 	inline uintptr_t r_module_end;
-	inline size_t r_size;
+
+	inline size_t r_roblox_end;
+	inline uintptr_t r_text_start;
+	inline uintptr_t r_text_end;
+	inline uintptr_t r_rdata_start;
+	inline uintptr_t r_rdata_end;
+	inline uintptr_t r_data_start;
+	inline uintptr_t r_data_end;
 
 	void init();
 	std::filesystem::path get_dll_dir(HMODULE dllModule);
