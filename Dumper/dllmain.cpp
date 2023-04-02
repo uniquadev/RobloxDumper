@@ -40,6 +40,7 @@ int WINAPI main_thread(HMODULE hThread)
     delete jh;
 
     FreeLibraryAndExitThread(hThread, 0);
+    return 0;
 }
 
 BOOL APIENTRY DllMain( HMODULE hModule,
