@@ -32,11 +32,11 @@ bool dump_vm_load(JobsHandler* h)
 		JOBERROR(h, "Could not find signature for LuaVM::load call");
 
 	auto vmload = get_calling(next_call(call_sign[0]));
-	h->push_addy("LuaVM::Load", get_offset(vmload));
+	h->push_sub("LuaVM::Load", get_offset(vmload));
 
 	// store data
 	JobsData::vmload_start = vmload;
-	JobsData::vmload_end = get_func_end(vmload);
+	JobsData::vmload_end = get_func_end(vmload) - vmload;
 
 	h->push_offset("LuaVM::Load_Size", JobsData::vmload_end);
 

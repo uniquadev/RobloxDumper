@@ -17,7 +17,7 @@ std::vector<uintptr_t> Dumper::Memory::get_xrefs(uintptr_t addr)
 std::vector<uintptr_t> Dumper::Memory::get_xrefs(uintptr_t addr, SearchSettings settings)
 {
 	auto res = std::vector<uintptr_t>();
-	auto regions = get_regions(settings.start, settings.protect);
+	auto regions = get_regions(settings.start, settings.protect, settings.end);
 	auto step = settings.fast_scan ? sizeof(uintptr_t) : 1;
 
 	for (auto& region : regions)
@@ -46,7 +46,7 @@ std::vector<uintptr_t> Dumper::Memory::get_xrefs(uintptr_t addr, SearchSettings 
 std::vector<uintptr_t> Dumper::Memory::find_string(const char* str, SearchSettings settings)
 {
 	auto res = std::vector<uintptr_t>();
-	auto regions = get_regions(settings.start, settings.protect);
+	auto regions = get_regions(settings.start, settings.protect, settings.end);
 	auto size = strlen(str);
 	auto step = settings.fast_scan ? sizeof(char*) : 1;
 	
@@ -155,7 +155,7 @@ std::vector<uintptr_t> Dumper::Memory::scan(std::string sign, SearchSettings set
 std::vector<uintptr_t> Dumper::Memory::scan(Signature sign, SearchSettings settings)
 {
 	auto res = std::vector<uintptr_t>();
-	auto regions = get_regions(settings.start, settings.protect);
+	auto regions = get_regions(settings.start, settings.protect, settings.end);
 
 	for (auto& region : regions)
 	{

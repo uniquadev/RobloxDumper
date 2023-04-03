@@ -29,61 +29,33 @@ namespace Dumper
 		std::vector<Job> jobs = {};
 		json output =
 		{
-			{"CPUTime", 0},
-			{"Offsets", json::object()},
-			{"Addys", json::object()},
-			{"Errors", json::array()}
+			{"offsets", json::object()},
+			{"addys", json::object()},
+			{"subs", json::object()},
+			{"errors", json::array()}
 		};
 
 		void push_addy(std::string name, uintptr_t addy)
 		{
-			output["Addys"][name] = addy;
+			output["addys"][name] = addy;
 		}
 		void push_offset(std::string name, uintptr_t offset)
 		{
-			output["Offsets"][name] = offset;
+			output["offsets"][name] = offset;
 		}
-
-		bool run()
+		void push_sub(std::string name, uintptr_t addy)
 		{
-			std::clock_t started_at = std::clock();
-
-			for (const auto& job : jobs)
-			{
-				if (!job.f(this))	// if job return false then force stop dumping
-				{
-					output["Errors"].push_back("STOPPED AT " + job.name);
-					return false;
-				}
-			}
-
-			std::stringstream stream2;
-			stream2 << 1000.0 * (std::clock() - started_at) / CLOCKS_PER_SEC << " ms";
-			output["CPUTime"] = stream2.str();
-
-			return true;
+			output["subs"][name] = json::object({
+				{"address", addy}
+			});
 		}
-
-		/// <summary>
-		/// Convert uintptr_t values to hex strings inside a json table. (beautification purpose)
-		/// </summary>
-		void int2hex_json(json& table)
+		void push_error(std::string error)
 		{
-			for (auto& [key, val] : table.items())
-			{
-				auto offset = val.get<uintptr_t>();
-				std::stringstream stream;
-				stream << "0x" << std::hex << offset;
-				table[key] = stream.str();
-			}
+			output["errors"].push_back(error);
 		}
 
-		void format()
-		{
-			int2hex_json(output["Offsets"]);
-			int2hex_json(output["Addys"]);
-		}
-
+		bool run();
+		void format();
 		void register_jobs();
 	};
 }

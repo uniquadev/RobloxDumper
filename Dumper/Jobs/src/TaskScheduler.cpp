@@ -24,7 +24,7 @@ bool dump_taskscheduler(JobsHandler* h)
 	uintptr_t taskscheduler = get_calling(call);
 	if (taskscheduler == 0)
 		JOBERROR(h, "Failed to find taskscheduler");
-	h->push_addy("GetTaskScheduler", get_offset(taskscheduler));
+	h->push_sub("GetTaskScheduler", get_offset(taskscheduler));
 	
 	// find singleton offset
 	const auto settings2 = SearchSettings(taskscheduler, taskscheduler + 300, PAGE_EXECUTE_READ, true, true);

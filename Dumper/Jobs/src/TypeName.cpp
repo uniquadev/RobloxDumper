@@ -20,7 +20,7 @@ bool dump_ltypename(JobsHandler* h)
 		JOBERROR(h, "Failed to find lua_typename signature");
 
 	uintptr_t lua_typename = get_offset(typename_sign[0]);
-	h->push_addy("LuaTypeName", lua_typename);
+	h->push_sub("LuaTypeName", lua_typename);
 
 	return true;
 }

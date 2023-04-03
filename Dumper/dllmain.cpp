@@ -29,11 +29,10 @@ int WINAPI main_thread(HMODULE hThread)
             MB_ICONERROR | MB_OK
         );
 	
-    jh->format();
-	
     auto dir = Dumper::Memory::get_dll_dir(hThread);
     std::ofstream ofs(dir / "dump.json");
 
+    jh->format();
     ofs << jh->output.dump(4);
     ofs.close();
 

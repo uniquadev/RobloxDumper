@@ -57,7 +57,7 @@ std::filesystem::path Dumper::Memory::get_dll_dir(HMODULE dllModule)
     return std::filesystem::path(std::wstring(Path)).parent_path();
 }
 
-std::vector<MEMORY_BASIC_INFORMATION> Dumper::Memory::get_regions(uintptr_t addr, DWORD protect)
+std::vector<MEMORY_BASIC_INFORMATION> Dumper::Memory::get_regions(uintptr_t addr, DWORD protect, uintptr_t end)
 {
     auto res = std::vector<MEMORY_BASIC_INFORMATION>();
     MEMORY_BASIC_INFORMATION mbi;
@@ -66,20 +66,36 @@ std::vector<MEMORY_BASIC_INFORMATION> Dumper::Memory::get_regions(uintptr_t addr
     for (auto addr = scan; VirtualQuery((LPCVOID)addr, &mbi, sizeof(mbi)) != 0;
         addr = reinterpret_cast<uintptr_t>(mbi.BaseAddress) + mbi.RegionSize)
     {
+        if (end && addr > end)
+            break;
         if (mbi.State == MEM_COMMIT && (mbi.Protect & protect))
             res.push_back(mbi);
     }
     
-    if (res.size() > 1 && (uintptr_t)res[0].BaseAddress < addr)
+    if (res.size() > 0)
     {
-        auto region = res[0];
         // adjust first region to start from addr
-        uintptr_t base = (uintptr_t)region.BaseAddress;
-        auto size = region.RegionSize;
+        if ((uintptr_t)res[0].BaseAddress < addr)
+        {
+            const auto region = res[0];
+            uintptr_t base = (uintptr_t)region.BaseAddress;
+            auto size = region.RegionSize;
 
-        res[0].BaseAddress = (PVOID)addr;
-        res[0].RegionSize = (base + size) - addr;
+            res[0].BaseAddress = (PVOID)addr;
+            res[0].RegionSize = (base + size) - addr;
+        }
+        // adjust last region to end at the right end address
+        const auto last = res.back();
+        if (end != 0 && ((uintptr_t)(last.BaseAddress) + last.RegionSize) > end)
+        {
+            const auto region = res.back();
+            uintptr_t base = (uintptr_t)region.BaseAddress;
+            auto size = region.RegionSize;
+
+            res.back().RegionSize = end - base;
+        }
     }
+    
 
     return res;
 }

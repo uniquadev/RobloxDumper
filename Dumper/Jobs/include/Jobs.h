@@ -3,7 +3,7 @@
 #include "JobsHandler.h"
 
 #define DEFINE_JOB(name) bool dump_##name(Dumper::JobsHandler* h)
-#define JOBERROR(h, x) { h->output["Errors"].push_back(x); return false; }
+#define JOBERROR(h, x) { h->push_error(x); return false; }
 
 DEFINE_JOB(misc);
 DEFINE_JOB(taskscheduler);

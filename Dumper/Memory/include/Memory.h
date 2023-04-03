@@ -23,6 +23,6 @@ namespace Dumper::Memory
 	void init();
 	std::filesystem::path get_dll_dir(HMODULE dllModule);
 
-	std::vector<MEMORY_BASIC_INFORMATION>  get_regions(uintptr_t addr = 0, DWORD protect = PAGE_EXECUTE_READWRITE);
+	std::vector<MEMORY_BASIC_INFORMATION>  get_regions(uintptr_t addr = 0, DWORD protect = PAGE_EXECUTE_READWRITE, uintptr_t end = 0);
 	std::optional<MEMORY_BASIC_INFORMATION> get_region(uintptr_t addr);
 }
