@@ -6,11 +6,19 @@
 
 void Dumper::JobsHandler::register_jobs()
 {
+	// INDIPENDENTS JOBS
 	jobs.push_back({ "Misc", dump_misc });
 	jobs.push_back({ "Taskscheduler", dump_taskscheduler });
 	jobs.push_back({ "LTypeName", dump_ltypename });
+
+	// DEPENDS ON SCRIPTMODULEINTERNAL & VMLOAD
 	jobs.push_back({ "LuaVM::Load", dump_vm_load });
 	jobs.push_back({ "pseudo2addr", dump_pseudo2addr });
+
+	// ADDONS
+	// TODO subs calling convetions dumper
+	// TODO subs retcheck dumper
+	// TODO check if luau fast region
 }
 
 CRITICAL_SECTION init_section;
