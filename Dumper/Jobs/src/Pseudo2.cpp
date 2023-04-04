@@ -31,7 +31,7 @@ bool dump_pseudo2addr(JobsHandler* h)
 		JOBERROR(h, "Failed to find nilObjectSign signature");
 
 	intptr_t offset = *(intptr_t*)(nilObjectSign[0] + 0x1);
-	h->push_offset("nilObject", get_offset(offset));
+	h->push_addy("nilObject", get_offset(offset));
 
 	return true;
 }
