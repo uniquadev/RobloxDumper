@@ -7,6 +7,7 @@
     <LocalDebuggerCommand>C:\Users\uniqu\AppData\Local\Roblox\Versions\version-b7209bbd7dd04d17\RobloxPlayerBeta.exe</LocalDebuggerCommand>
     <LocalDebuggerAttach>true</LocalDebuggerAttach>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerMergeEnvironment>false</LocalDebuggerMergeEnvironment>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LocalDebuggerCommand>

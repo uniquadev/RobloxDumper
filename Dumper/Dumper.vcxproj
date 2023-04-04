@@ -163,6 +163,7 @@
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Jobs\src\JobsHandler.cpp" />
+    <ClCompile Include="Jobs\src\Pseudo2.cpp" />
     <ClCompile Include="Jobs\src\TypeName.cpp" />
     <ClCompile Include="Jobs\src\Misc.cpp" />
     <ClCompile Include="Jobs\src\TaskScheduler.cpp" />

@@ -22,6 +22,8 @@ bool dump_vm_load(JobsHandler* h)
 	if (refs.size() < 1)
 		JOBERROR(h, "Failed to find moduleRef string references");
 
+	JobsData::modulescriptinternal_xref = refs[0];
+
 	const auto sign = Signature("6A 00 83 C2 10 68 ? ? ? ? E8 ? ? ? ?");
 
 	auto call_sign = scan(
