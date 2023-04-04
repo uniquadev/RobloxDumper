@@ -8,5 +8,6 @@
 DEFINE_JOB(misc);
 DEFINE_JOB(taskscheduler);
 DEFINE_JOB(ltypename);
+DEFINE_JOB(scresume);
 DEFINE_JOB(vm_load);
 DEFINE_JOB(pseudo2addr);
