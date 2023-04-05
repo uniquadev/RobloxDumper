@@ -7,14 +7,15 @@
 void Dumper::JobsHandler::register_jobs()
 {
 	// INDIPENDENTS JOBS
-	jobs.push_back({ "Misc", dump_misc });
-	jobs.push_back({ "Taskscheduler", dump_taskscheduler });
-	jobs.push_back({ "LTypeName", dump_ltypename });
-	jobs.push_back({ "SCResume", dump_scresume });
+	register_job("Misc", dump_misc);
+	register_job("Taskscheduler", dump_taskscheduler);
+	register_job("LTypeName", dump_ltypename);
+	register_job("SCResume", dump_scresume);
 
 	// DEPENDS ON SCRIPTMODULEINTERNAL & VMLOAD
-	jobs.push_back({ "LuaVM::Load", dump_vm_load });
-	jobs.push_back({ "pseudo2addr", dump_pseudo2addr });
+	register_job("LuaVM::Load", dump_vm_load, {
+		{"pseudo2addr", dump_pseudo2addr}
+	});
 
 	// ADDONS
 	// TODO subs calling convetions dumper
@@ -24,6 +25,15 @@ void Dumper::JobsHandler::register_jobs()
 
 CRITICAL_SECTION init_section;
 
+void Dumper::JobsHandler::run_job(Dumper::Job job)
+{
+	if (!job.f(this))	// if job return false then force stop dumping
+		push_error("ERROR AT " + job.name);
+	else
+		for (const auto& child : job.children)
+			run_job(child);
+}
+
 bool Dumper::JobsHandler::run()
 {
 	std::ignore = InitializeCriticalSectionAndSpinCount(&init_section, 0x00000200UL);
@@ -31,14 +41,7 @@ bool Dumper::JobsHandler::run()
 	
 	EnterCriticalSection(&init_section);
 	for (const auto& job : jobs)
-	{
-		if (!job.f(this))	// if job return false then force stop dumping
-		{
-			LeaveCriticalSection(&init_section);
-			push_error("STOPPED AT " + job.name);
-			return false;
-		}
-	}
+		run_job(job);
 	LeaveCriticalSection(&init_section);
 
 	std::stringstream stream2;

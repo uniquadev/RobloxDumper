@@ -38,9 +38,7 @@ bool dump_vm_load(JobsHandler* h)
 
 	// store data
 	JobsData::vmload_start = vmload;
-	JobsData::vmload_end = get_func_end(vmload) - vmload;
-
-	h->push_offset("LuaVM::Load_Size", JobsData::vmload_end);
+	JobsData::vmload_end = get_func_end(vmload); // get_func_end must be improved for big/shuffled functions
 
 	// luau_load inlined
 	auto version_check = scan(
@@ -50,7 +48,7 @@ bool dump_vm_load(JobsHandler* h)
 	if (version_check.size() < 1)
 		JOBERROR(h, "Could not find signature for lua_load inline");
 
-	h->push_addy("luau_load", get_offset(version_check[0]));
+	h->push_addy("inline_luau_load", get_offset(version_check[0]));
 
 	// luavm_load_hashcheck_hook
 	auto exit_routine = scan(

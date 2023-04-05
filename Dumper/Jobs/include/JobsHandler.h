@@ -21,6 +21,7 @@ namespace Dumper
 	{
 		std::string name;
 		std::function<bool(JobsHandler*)> f;
+		std::vector<Job> children;
 	};
 
 	class JobsHandler
@@ -55,8 +56,14 @@ namespace Dumper
 		}
 
 		bool run();
+		void run_job(Job job);
 		void format();
+
 		void register_jobs();
+		void register_job(std::string name, std::function<bool(JobsHandler*)> f, std::vector<Job> children = {})
+		{
+			jobs.push_back({ name, f, children });
+		};
 	};
 }
 
