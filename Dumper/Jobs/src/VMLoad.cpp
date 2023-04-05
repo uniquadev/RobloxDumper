@@ -51,5 +51,43 @@ bool dump_vm_load(JobsHandler* h)
 		JOBERROR(h, "Could not find signature for lua_load inline");
 
 	h->push_addy("luau_load", get_offset(version_check[0]));
+
+	// luavm_load_hashcheck_hook
+	auto exit_routine = scan(
+		"8D ? ? ? ? ? E8 ? ? ? ? 8D ? ? ? ? ? E8 ? ? ? ?",
+		SearchSettings(vmload, vmload + 0x6000, PAGE_EXECUTE_READ, true, false)
+	);
+	if (exit_routine.size() < 1)
+		JOBERROR(h, "Could not find signature for luavm_load_hashcheck_hook");
+
+	h->push_addy("luavm_load_hashcheck_hook", get_offset(exit_routine[0]));
+
+	// luavm_load_bytecode_hook
+	auto decompression_end = scan(
+		"8B ? ? ? ? ? 8B ? ? ? ? ? 2B ?",
+		SearchSettings(vmload, vmload + 0x6000, PAGE_EXECUTE_READ, true, false)
+	);
+	if (decompression_end.size() < 1)
+		JOBERROR(h, "Could not find signature for luavm_load_bytecode_hook");
+
+	h->push_addy("luavm_load_bytecode_hook", get_offset(decompression_end[0]));
+
+	// luavm_load stackframe
+	unsigned int bytecode_offset{}, bytecode_len_offset{}; // these will be set to disps of ebp
+	auto arg_pusher = scan(
+		"8B ? ? 8B ? ? ? ? ? ? ? E8 ? ? ? ? 83 C4 08",
+		SearchSettings(vmload, vmload + 0x6000, PAGE_EXECUTE_READ, true, false)
+	);
+	if (arg_pusher.size() < 1) {
+		JOBERROR(h, "Could not find signature for luavm_load_bytecode_hook");
+	} else {
+		// edx, ecx
+		bytecode_len_offset = ((~*reinterpret_cast<unsigned int*>(arg_pusher[0] + 2)) & 0xFF) + 1; // single byte displacement
+		bytecode_offset = ~*reinterpret_cast<unsigned int*>(arg_pusher[0] + 5) + 1;
+	}
+
+	h->push_offset("luavm_load_stackframe_bytecode", bytecode_offset);
+	h->push_offset("luavm_load_stackframe_bytecode_len", bytecode_len_offset);
+
 	return true;
 }
