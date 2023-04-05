@@ -11,6 +11,7 @@ void Dumper::JobsHandler::register_jobs()
 	register_job("Taskscheduler", dump_taskscheduler);
 	register_job("LTypeName", dump_ltypename);
 	register_job("SCResume", dump_scresume);
+	register_job("lua_openbase", dump_lua_openbase);
 
 	// DEPENDS ON SCRIPTMODULEINTERNAL & VMLOAD
 	register_job("LuaVM::Load", dump_vm_load, {

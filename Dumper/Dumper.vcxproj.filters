@@ -48,6 +48,9 @@
     <ClCompile Include="Jobs\src\VMLoad\VMLoadHooks.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="Jobs\src\LuaOpenBase.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Jobs\include\JobsHandler.h">

@@ -4,7 +4,7 @@
     <ShowAllFiles>true</ShowAllFiles>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LocalDebuggerCommand>C:\Users\uniqu\AppData\Local\Roblox\Versions\version-b7209bbd7dd04d17\RobloxPlayerBeta.exe</LocalDebuggerCommand>
+    <LocalDebuggerCommand>C:\Users\uniqu\AppData\Local\Roblox\Versions\version-5354115123b54b9a\RobloxPlayerBeta.exe</LocalDebuggerCommand>
     <LocalDebuggerAttach>true</LocalDebuggerAttach>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerMergeEnvironment>false</LocalDebuggerMergeEnvironment>

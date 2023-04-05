@@ -46,4 +46,6 @@ bool dump_vmload_hooks(JobsHandler* h)
 
 	h->push_offset("luavm_load_stackframe_bytecode", bytecode_offset);
 	h->push_offset("luavm_load_stackframe_bytecode_len", bytecode_len_offset);
+
+	return true;
 }

@@ -114,13 +114,8 @@ uintptr_t Dumper::Memory::get_func_top(uintptr_t addr)
 {
 	const BYTE prol[3] = { 0x55, 0x8B, 0xEC }; // prologue
 	
-	// get current region
-	auto region = get_region(addr);
-	if (!region.has_value())
-		return 0;
-	
 	// loop back from addr to region base & memcmp with prol header
-	for (size_t i = addr; i >= reinterpret_cast<uintptr_t>(region.value().BaseAddress); i--)
+	for (size_t i = addr; i >= r_module; i--)
 	{
 		if (memcmp((void*)i, prol, sizeof(prol)) == 0)
 			return i;
