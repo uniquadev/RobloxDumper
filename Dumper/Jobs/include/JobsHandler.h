@@ -27,6 +27,7 @@ namespace Dumper
 	class JobsHandler
 	{
 	public:
+		size_t errors = 0;
 		std::vector<Job> jobs = {};
 		json output =
 		{
@@ -53,6 +54,7 @@ namespace Dumper
 		void push_error(std::string error)
 		{
 			output["errors"].push_back(error);
+			errors++;
 		}
 
 		bool run();

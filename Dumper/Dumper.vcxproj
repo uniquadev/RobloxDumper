@@ -163,12 +163,13 @@
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Jobs\src\JobsHandler.cpp" />
-    <ClCompile Include="Jobs\src\Pseudo2.cpp" />
+    <ClCompile Include="Jobs\src\VMLoad\Pseudo2.cpp" />
     <ClCompile Include="Jobs\src\SCResume.cpp" />
     <ClCompile Include="Jobs\src\TypeName.cpp" />
     <ClCompile Include="Jobs\src\Misc.cpp" />
     <ClCompile Include="Jobs\src\TaskScheduler.cpp" />
-    <ClCompile Include="Jobs\src\VMLoad.cpp" />
+    <ClCompile Include="Jobs\src\VMLoad\VMLoadHooks.cpp" />
+    <ClCompile Include="Jobs\src\VMLoad\VMLoad.cpp" />
     <ClCompile Include="Memory\src\Memory.cpp" />
     <ClCompile Include="Memory\src\MemoryUtils.cpp" />
   </ItemGroup>

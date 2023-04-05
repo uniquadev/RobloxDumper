@@ -14,7 +14,8 @@ void Dumper::JobsHandler::register_jobs()
 
 	// DEPENDS ON SCRIPTMODULEINTERNAL & VMLOAD
 	register_job("LuaVM::Load", dump_vm_load, {
-		{"pseudo2addr", dump_pseudo2addr}
+		{"pseudo2addr", dump_pseudo2addr},
+		{"vmload_hooks", dump_vmload_hooks}
 	});
 
 	// ADDONS
@@ -48,7 +49,7 @@ bool Dumper::JobsHandler::run()
 	stream2 << 1000.0 * (std::clock() - started_at) / CLOCKS_PER_SEC << " ms";
 	output["cputime"] = stream2.str();
 
-	return true;
+	return errors == 0 ? true : false;
 }
 
 void Dumper::JobsHandler::format()

@@ -36,13 +36,16 @@
     <ClCompile Include="Jobs\src\TypeName.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
-    <ClCompile Include="Jobs\src\VMLoad.cpp">
+    <ClCompile Include="Jobs\src\VMLoad\VMLoad.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
-    <ClCompile Include="Jobs\src\Pseudo2.cpp">
+    <ClCompile Include="Jobs\src\VMLoad\Pseudo2.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="Jobs\src\SCResume.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Jobs\src\VMLoad\VMLoadHooks.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>
