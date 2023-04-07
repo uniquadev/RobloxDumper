@@ -20,7 +20,22 @@ PtrObfuscationType Dumper::PtrDeobf::get_ptrobf_type(uintptr_t text_start, size_
         /* buffer:          */ data + offset,
         /* length:          */ length - offset,
         /* instruction:     */ &instruction
-    ))) {
+    )))
+    {
+        switch (instruction.info.opcode)
+        {
+        // SUB cases (https://youtu.be/NxSbPHctke4)
+        case 0x2B: //SUB r32, r/m32
+            return PtrObfuscationType::SUB_O_P; // b - *b
+        case 0x29:  //SUB r/m32, r32
+            return PtrObfuscationType::SUB_P_O; // *b - b
+        case 0x03: //ADD r32, r/m32
+            return PtrObfuscationType::ADD;
+        case 0x33: //XOR r32, r/m32
+            return PtrObfuscationType::XOR;
+        default:
+            break;
+        }
         offset += instruction.info.length;
     }
     

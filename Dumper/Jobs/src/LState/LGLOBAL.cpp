@@ -28,8 +28,7 @@ bool dump_lglobal(JobsHandler* h)
 		JOBERROR(h, "Can't find sign of L->global inside os_date");
 
 	h->push_offset("L_GLOBAL", *(BYTE*)(sign[0] + 10));
-
-	h->output["test"] = PtrDeobf::get_ptrobf_type_str(sign[0] + 8);
+	h->push_ptrobf("L_GLOBAL", PtrDeobf::get_ptrobf_type_str(sign[0] + 8));
 
 	return true;
 }
