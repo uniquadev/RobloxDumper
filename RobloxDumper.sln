@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dumper", "Dumper\Dumper.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Injector", "Injector\Injector.vcxproj", "{4B3AE637-8F3A-401F-A958-BE2F421B87D5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Zydis", "Zydis\Zydis.vcxproj", "{40CC2813-392C-4543-821A-BAFE38EEC156}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{4B3AE637-8F3A-401F-A958-BE2F421B87D5}.Release|x64.Build.0 = Release|x64
 		{4B3AE637-8F3A-401F-A958-BE2F421B87D5}.Release|x86.ActiveCfg = Release|Win32
 		{4B3AE637-8F3A-401F-A958-BE2F421B87D5}.Release|x86.Build.0 = Release|Win32
+		{40CC2813-392C-4543-821A-BAFE38EEC156}.Debug|x64.ActiveCfg = Debug|x64
+		{40CC2813-392C-4543-821A-BAFE38EEC156}.Debug|x64.Build.0 = Debug|x64
+		{40CC2813-392C-4543-821A-BAFE38EEC156}.Debug|x86.ActiveCfg = Debug|Win32
+		{40CC2813-392C-4543-821A-BAFE38EEC156}.Debug|x86.Build.0 = Debug|Win32
+		{40CC2813-392C-4543-821A-BAFE38EEC156}.Release|x64.ActiveCfg = Release|x64
+		{40CC2813-392C-4543-821A-BAFE38EEC156}.Release|x64.Build.0 = Release|x64
+		{40CC2813-392C-4543-821A-BAFE38EEC156}.Release|x86.ActiveCfg = Release|Win32
+		{40CC2813-392C-4543-821A-BAFE38EEC156}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

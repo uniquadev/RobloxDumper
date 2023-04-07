@@ -89,8 +89,5 @@
     <ClInclude Include="Libs\Json.hpp">
       <Filter>File di intestazione</Filter>
     </ClInclude>
-    <ClInclude Include="Libs\Zydis.h">
-      <Filter>File di intestazione</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
