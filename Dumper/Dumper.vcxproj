@@ -164,6 +164,7 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Jobs\src\JobsHandler.cpp" />
     <ClCompile Include="Jobs\src\LuaOpenBase.cpp" />
+    <ClCompile Include="Jobs\src\TaskDefer.cpp" />
     <ClCompile Include="Jobs\src\VMLoad\Pseudo2.cpp" />
     <ClCompile Include="Jobs\src\SCResume.cpp" />
     <ClCompile Include="Jobs\src\TypeName.cpp" />

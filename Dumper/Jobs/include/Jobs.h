@@ -10,6 +10,7 @@ DEFINE_JOB(taskscheduler);
 DEFINE_JOB(ltypename);
 DEFINE_JOB(scresume);
 DEFINE_JOB(lua_openbase);
+DEFINE_JOB(taskdefer);
 
 
 DEFINE_JOB(vm_load);
