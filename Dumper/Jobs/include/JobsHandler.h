@@ -4,7 +4,7 @@
 #include <functional>
 #include <stdexcept>
 
-#include "Libs/Json.hpp"
+#include "Json.hpp"
 
 namespace Dumper
 {
@@ -34,6 +34,7 @@ namespace Dumper
 			{"offsets", json::object()},
 			{"addys", json::object()},
 			{"subs", json::object()},
+			{"ptrobf", json::object()},
 			{"errors", json::array()}
 		};
 
@@ -50,6 +51,12 @@ namespace Dumper
 			output["subs"][name] = json::object({
 				{"address", addy}
 			});
+		}
+		void push_ptrobf(std::string name, std::string obf)
+		{
+			output["ptrobf"].push_back(
+				{name, obf}
+			);
 		}
 		void push_error(std::string error)
 		{

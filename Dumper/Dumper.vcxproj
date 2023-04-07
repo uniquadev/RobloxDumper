@@ -86,13 +86,13 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)Jobs\include;$(ProjectDir)Common\include;$(ProjectDir)Memory\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Jobs\include;$(ProjectDir)Libs;$(ProjectDir)Memory\include;$(ProjectDir)PtrDeobf\include;$(SolutionDir)\Zydis;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>DbgHelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DbgHelp.lib;$(SolutionDir)build\$(Configuration)\Zydis.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -107,7 +107,7 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)Jobs\include;$(ProjectDir)Common\include;$(ProjectDir)Memory\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Jobs\include;$(ProjectDir)Libs;$(ProjectDir)Memory\include;$(ProjectDir)PtrDeobf\include;$(SolutionDir)\Zydis;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -115,7 +115,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>DbgHelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DbgHelp.lib;$(SolutionDir)build\$(Configuration)\Zydis.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -128,13 +128,13 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)Jobs\include;$(ProjectDir)Common\include;$(ProjectDir)Memory\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Jobs\include;$(ProjectDir)Libs;$(ProjectDir)Memory\include;$(ProjectDir)PtrDeobf\include;$(SolutionDir)\Zydis;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>DbgHelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DbgHelp.lib;Zydis.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -149,7 +149,7 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)Jobs\include;$(ProjectDir)Common\include;$(ProjectDir)Memory\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Jobs\include;$(ProjectDir)Libs;$(ProjectDir)Memory\include;$(ProjectDir)PtrDeobf\include;$(SolutionDir)\Zydis;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -157,13 +157,15 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>DbgHelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>DbgHelp.lib;Zydis.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Jobs\src\JobsHandler.cpp" />
+    <ClCompile Include="Jobs\src\LState\LGLOBAL.cpp" />
     <ClCompile Include="Jobs\src\LuaOpenBase.cpp" />
+    <ClCompile Include="Jobs\src\OsDate.cpp" />
     <ClCompile Include="Jobs\src\VMLoad\Pseudo2.cpp" />
     <ClCompile Include="Jobs\src\SCResume.cpp" />
     <ClCompile Include="Jobs\src\TypeName.cpp" />
@@ -173,15 +175,23 @@
     <ClCompile Include="Jobs\src\VMLoad\VMLoad.cpp" />
     <ClCompile Include="Memory\src\Memory.cpp" />
     <ClCompile Include="Memory\src\MemoryUtils.cpp" />
+    <ClCompile Include="PtrDeobf\src\PtrDeobf.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\include\Libs\Json.hpp" />
     <ClInclude Include="Jobs\include\Jobs.h" />
     <ClInclude Include="Jobs\include\JobsData.h" />
     <ClInclude Include="Jobs\include\JobsHandler.h" />
+    <ClInclude Include="Libs\Json.hpp" />
     <ClInclude Include="Memory\include\Memory.h" />
     <ClInclude Include="Memory\include\MemoryUtils.h" />
     <ClInclude Include="Memory\include\Signature.h" />
+    <ClInclude Include="PtrDeobf\include\PtrDeobf.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Zydis\Zydis.vcxproj">
+      <Project>{40cc2813-392c-4543-821a-bafe38eec156}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

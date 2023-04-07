@@ -16,3 +16,6 @@ DEFINE_JOB(taskdefer);
 DEFINE_JOB(vm_load);
 DEFINE_JOB(pseudo2addr);
 DEFINE_JOB(vmload_hooks);
+
+DEFINE_JOB(os_date);
+DEFINE_JOB(lglobal);
