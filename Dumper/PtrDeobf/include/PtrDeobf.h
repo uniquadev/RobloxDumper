@@ -4,11 +4,11 @@
 
 enum PtrObfuscationType
 {
-	ADD,
-	SUB_P_X,
-	SUB_X_P,
-	XOR,
-	NONE
+	ADD, // (obj + off) + *(uintptr_t*)(obj + off)
+	SUB_P_X, // *(uintptr_t*)(obj + off) - (obj + off)
+	SUB_X_P, // (obj + off) - *(uintptr_t*)(obj + off)
+	XOR, // (obj + off) ^ *(uintptr_t*)(obj + off)
+	NONE // *(uintptr_t*)(obj + off)
 };
 
 namespace Dumper::PtrDeobf
