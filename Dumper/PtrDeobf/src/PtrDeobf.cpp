@@ -24,11 +24,18 @@ PtrObfuscationType Dumper::PtrDeobf::get_ptrobf_type(uintptr_t text_start, size_
     {
         switch (instruction.info.opcode)
         {
-        // SUB cases (https://youtu.be/NxSbPHctke4)
         case 0x2B: //SUB r32, r/m32
-            return PtrObfuscationType::SUB_O_P; // b - *b
+            return PtrObfuscationType::SUB_X_P; // b - *b
         case 0x29:  //SUB r/m32, r32
-            return PtrObfuscationType::SUB_P_O; // *b - b
+        {
+            // this opcode accept:
+            // #1 sub     edx, esi
+            // #2 sub     [edx], esi
+            // #2 case is simple
+            // #1 case require us to figure out which of the reg got deref
+            // (https://youtu.be/NxSbPHctke4)
+            return PtrObfuscationType::SUB_P_X; // *b - b
+        }
         case 0x03: //ADD r32, r/m32
             return PtrObfuscationType::ADD;
         case 0x33: //XOR r32, r/m32

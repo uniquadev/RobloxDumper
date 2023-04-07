@@ -5,8 +5,8 @@
 enum PtrObfuscationType
 {
 	ADD,
-	SUB_P_O,
-	SUB_O_P,
+	SUB_P_X,
+	SUB_X_P,
 	XOR,
 	NONE
 };
@@ -19,10 +19,10 @@ namespace Dumper::PtrDeobf
 		{
 		case ADD:
 			return "ADD";
-		case SUB_P_O:
-			return "SUB_P_O";
-		case SUB_O_P:
-			return "SUB_O_P";
+		case SUB_P_X:
+			return "SUB_P_X";
+		case SUB_X_P:
+			return "SUB_X_P";
 		case XOR:
 			return "XOR";
 		default:
