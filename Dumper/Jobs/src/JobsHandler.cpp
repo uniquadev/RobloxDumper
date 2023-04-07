@@ -19,6 +19,10 @@ void Dumper::JobsHandler::register_jobs()
 		{"vmload_hooks", dump_vmload_hooks}
 	});
 
+	register_job("os_date", dump_os_date, {
+		{"lglobal", dump_lglobal}
+	});
+
 	// ADDONS
 	// TODO subs calling convetions dumper
 	// TODO subs retcheck dumper
