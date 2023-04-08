@@ -13,6 +13,7 @@ void Dumper::JobsHandler::register_jobs()
 	register_job("SCResume", dump_scresume);
 	register_job("lua_openbase", dump_lua_openbase);
 	register_job("TaskDefer", dump_taskdefer);
+	register_job("ScriptState", dump_getstate);
 
 	// DEPENDS ON SCRIPTMODULEINTERNAL & VMLOAD
 	register_job("LuaVM::Load", dump_vm_load, {

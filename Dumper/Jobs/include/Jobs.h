@@ -11,7 +11,7 @@ DEFINE_JOB(ltypename);
 DEFINE_JOB(scresume);
 DEFINE_JOB(lua_openbase);
 DEFINE_JOB(taskdefer);
-
+DEFINE_JOB(getstate);
 
 DEFINE_JOB(vm_load);
 DEFINE_JOB(pseudo2addr);

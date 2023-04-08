@@ -14,4 +14,7 @@ namespace Dumper::JobsData
 
 	inline uintptr_t os_date_start;
 	inline uintptr_t os_date_end;
+
+	inline uintptr_t startscript_start;
+	inline uintptr_t startscript_end;
 }
