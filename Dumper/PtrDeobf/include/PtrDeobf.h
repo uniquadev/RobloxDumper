@@ -8,14 +8,14 @@ enum PtrObfuscationType
 	SUB_P_X, // *(uintptr_t*)(obj + off) - (obj + off)
 	SUB_X_P, // (obj + off) - *(uintptr_t*)(obj + off)
 	XOR, // (obj + off) ^ *(uintptr_t*)(obj + off)
-	NONE // *(uintptr_t*)(obj + off)
+	NONE_TYPE // *(uintptr_t*)(obj + off)
 };
 
 enum PtrObfPosition
 {
 	LEFT,
 	RIGHT,
-	NONE
+	NONE_POSITION
 };
 
 namespace Dumper::PtrDeobf

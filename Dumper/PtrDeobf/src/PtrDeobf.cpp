@@ -33,7 +33,7 @@ PtrObfPosition get_ptrpos_fromlea(ZydisRegister left, ZydisRegister right, uintp
         else if (operand.reg.value == right)
             return PtrObfPosition::RIGHT;
     }
-    return PtrObfPosition::NONE;
+    return PtrObfPosition::NONE_POSITION;
 }
 
 PtrObfuscationType Dumper::PtrDeobf::get_ptrobf_type(uintptr_t text_start, size_t length)
@@ -77,7 +77,7 @@ PtrObfuscationType Dumper::PtrDeobf::get_ptrobf_type(uintptr_t text_start, size_
             else if (pos == PtrObfPosition::RIGHT)
                 return PtrObfuscationType::SUB_X_P;
 
-            return PtrObfuscationType::NONE;
+            return PtrObfuscationType::NONE_TYPE;
         }
         case 0x03: //ADD r32, r/m32
             return PtrObfuscationType::ADD;
@@ -89,5 +89,5 @@ PtrObfuscationType Dumper::PtrDeobf::get_ptrobf_type(uintptr_t text_start, size_
         offset += instruction.info.length;
     }
     
-    return PtrObfuscationType::NONE;
+    return PtrObfuscationType::NONE_TYPE;
 }
