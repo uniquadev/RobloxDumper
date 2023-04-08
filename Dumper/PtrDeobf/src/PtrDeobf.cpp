@@ -103,7 +103,7 @@ PtrObfuscationType Dumper::PtrDeobf::get_ptrobf_type(uintptr_t text_start, size_
         }
         case 0x03: //ADD r32, r/m32
         {
-            // check if add is using a 2nd operand with immediate value
+            // check if add is using a 2nd register operand holding immediate value
             if (instruction.operands[1].type == ZYDIS_OPERAND_TYPE_REGISTER)
             {
                 auto it = std::find(holding_imm.begin(), holding_imm.end(), instruction.operands[1].reg.value);
