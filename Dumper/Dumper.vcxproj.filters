@@ -63,7 +63,10 @@
     <ClCompile Include="Jobs\src\TaskDefer.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
-    <ClCompile Include="Jobs\src\GetState.cpp">
+    <ClCompile Include="Jobs\src\GetState\GetState.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Jobs\src\GetState\ScriptState.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>
