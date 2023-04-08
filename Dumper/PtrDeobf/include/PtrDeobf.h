@@ -11,6 +11,13 @@ enum PtrObfuscationType
 	NONE // *(uintptr_t*)(obj + off)
 };
 
+enum PtrObfPosition
+{
+	LEFT,
+	RIGHT,
+	NONE
+};
+
 namespace Dumper::PtrDeobf
 {
 	static std::string ptrobf_type_to_str(PtrObfuscationType type)

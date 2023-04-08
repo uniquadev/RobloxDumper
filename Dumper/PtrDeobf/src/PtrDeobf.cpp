@@ -7,6 +7,35 @@ std::string Dumper::PtrDeobf::get_ptrobf_type_str(uintptr_t text_start, size_t l
     return ptrobf_type_to_str(get_ptrobf_type(text_start, length));
 }
 
+
+PtrObfPosition get_ptrpos_fromlea(ZydisRegister left, ZydisRegister right, uintptr_t text_start, size_t lenght)
+{
+    ZyanU8* data = (ZyanU8*)text_start;
+
+    ZyanUSize offset = 0;
+    ZydisDisassembledInstruction instruction;
+    while (ZYAN_SUCCESS(ZydisDisassembleIntel(
+        ZYDIS_MACHINE_MODE_LONG_64,
+        text_start,
+        data + offset,
+        lenght - offset,
+        &instruction
+    )))
+    {
+        offset += instruction.info.length;
+        if (instruction.info.opcode != 0x8D) // we look for lea operations on left or right reigsters
+            continue;
+        auto operand = instruction.operands[0];
+        if (operand.type != ZYDIS_OPERAND_TYPE_REGISTER)
+            continue;
+        if (operand.reg.value == left)
+            return PtrObfPosition::LEFT;
+        else if (operand.reg.value == right)
+            return PtrObfPosition::RIGHT;
+    }
+    return PtrObfPosition::NONE;
+}
+
 PtrObfuscationType Dumper::PtrDeobf::get_ptrobf_type(uintptr_t text_start, size_t length)
 {
     ZyanU8* data = (ZyanU8*)text_start;
@@ -33,8 +62,22 @@ PtrObfuscationType Dumper::PtrDeobf::get_ptrobf_type(uintptr_t text_start, size_
             // #2 sub     [edx], esi
             // #2 case is simple
             // #1 case require us to figure out which of the reg got deref
-            // (https://youtu.be/NxSbPHctke4)
-            return PtrObfuscationType::SUB_P_X; // *b - b
+            // #2 case
+            if (instruction.operands[0].type == ZYDIS_OPERAND_TYPE_MEMORY)
+                return PtrObfuscationType::SUB_P_X; // *b - b
+            // #1 case
+            auto pos = get_ptrpos_fromlea(
+                instruction.operands[0].reg.value,
+                instruction.operands[1].reg.value,
+                text_start,
+                offset
+            );
+            if (pos == PtrObfPosition::LEFT)
+                return PtrObfuscationType::SUB_P_X;
+            else if (pos == PtrObfPosition::RIGHT)
+                return PtrObfuscationType::SUB_X_P;
+
+            return PtrObfuscationType::NONE;
         }
         case 0x03: //ADD r32, r/m32
             return PtrObfuscationType::ADD;
