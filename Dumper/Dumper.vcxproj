@@ -162,6 +162,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="Jobs\src\GetState\ScriptState.cpp" />
     <ClCompile Include="Jobs\src\JobsHandler.cpp" />
     <ClCompile Include="Jobs\src\LState\LGLOBAL.cpp" />
     <ClCompile Include="Jobs\src\LState\LTOP.cpp" />

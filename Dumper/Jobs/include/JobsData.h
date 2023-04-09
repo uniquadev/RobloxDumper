@@ -17,4 +17,5 @@ namespace Dumper::JobsData
 
 	inline uintptr_t startscript_start;
 	inline uintptr_t startscript_end;
+	inline uintptr_t getstate;
 }

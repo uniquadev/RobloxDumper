@@ -38,9 +38,17 @@ namespace Dumper
 			{"errors", json::array()}
 		};
 
+		std::string int2hex(uintptr_t num) {
+			std::stringstream stream;
+			stream << "0x" << std::uppercase << std::hex << num;
+			return stream.str();
+		}
 		void push_addy(std::string name, uintptr_t addy)
 		{
-			output["addys"][name] = addy;
+			output["addys"][name] = json::object({
+				{"address", addy},
+				{"address_hex", int2hex(addy)},
+			});
 		}
 		void push_offset(std::string name, uintptr_t offset)
 		{
@@ -49,7 +57,8 @@ namespace Dumper
 		void push_sub(std::string name, uintptr_t addy)
 		{
 			output["subs"][name] = json::object({
-				{"address", addy}
+				{"address", addy},
+				{"address_hex", int2hex(addy)},
 			});
 		}
 		void push_ptrobf(std::string name, std::string obf)

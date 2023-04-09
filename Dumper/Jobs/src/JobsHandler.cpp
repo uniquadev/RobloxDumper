@@ -28,6 +28,10 @@ void Dumper::JobsHandler::register_jobs()
 		{"ltop", dump_ltop}
 	});
 
+	register_job("GetState", dump_getstate, {
+		{"scriptstate", dump_scriptstate}
+	});
+
 	// ADDONS
 	// TODO subs calling convetions dumper
 	// TODO subs retcheck dumper
