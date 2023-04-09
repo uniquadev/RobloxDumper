@@ -14,6 +14,7 @@ void Dumper::JobsHandler::register_jobs()
 	register_job("lua_openbase", dump_lua_openbase);
 	register_job("TaskDefer", dump_taskdefer);
 	register_job("ScriptState", dump_getstate);
+	register_job("Printf", dump_printf);
 
 	// DEPENDS ON SCRIPTMODULEINTERNAL & VMLOAD
 	register_job("LuaVM::Load", dump_vm_load, {
@@ -21,8 +22,10 @@ void Dumper::JobsHandler::register_jobs()
 		{"vmload_hooks", dump_vmload_hooks}
 	});
 
+	// DEPENDS ON os_date
 	register_job("os_date", dump_os_date, {
-		{"lglobal", dump_lglobal}
+		{"lglobal", dump_lglobal},
+		{"ltop", dump_ltop}
 	});
 
 	// ADDONS

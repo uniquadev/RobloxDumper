@@ -66,6 +66,12 @@
     <ClCompile Include="Jobs\src\GetState.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="Jobs\src\LState\LTOP.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Jobs\src\Printf.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Jobs\include\JobsHandler.h">

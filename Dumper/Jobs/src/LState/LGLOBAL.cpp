@@ -4,7 +4,6 @@
 #include "JobsData.h"
 #include "PtrDeobf.h"
 
-
 using namespace Dumper;
 using namespace Memory;
 
