@@ -13,7 +13,9 @@ DEFINE_JOB(scresume);
 DEFINE_JOB(lua_openbase);
 DEFINE_JOB(taskdefer);
 DEFINE_JOB(getstate);
+DEFINE_JOB(scriptstate);
 DEFINE_JOB(printf);
+DEFINE_JOB(lbase);
 
 DEFINE_JOB(vm_load);
 DEFINE_JOB(pseudo2addr);
@@ -21,6 +23,7 @@ DEFINE_JOB(vmload_hooks);
 
 DEFINE_JOB(os_date);
 DEFINE_JOB(lglobal);
+DEFINE_JOB(ltop);
 
 DEFINE_JOB(getstate);
 DEFINE_JOB(scriptstate);

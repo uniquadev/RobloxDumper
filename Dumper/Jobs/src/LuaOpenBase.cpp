@@ -15,7 +15,7 @@ bool dump_lua_openbase(JobsHandler* h)
 		JOBERROR(h, "Can't find _VERSION string");
 
 	h->push_sub(
-		"lua_openbase",
+		"luaopen_base",
 		get_offset(
 			get_func_top(version_str[0])
 		)

@@ -63,9 +63,6 @@
     <ClCompile Include="Jobs\src\TaskDefer.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
-    <ClCompile Include="Jobs\src\GetState\GetState.cpp">
-      <Filter>File di origine</Filter>
-    </ClCompile>
     <ClCompile Include="Jobs\src\GetState\ScriptState.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
@@ -73,6 +70,15 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="Jobs\src\Printf.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Jobs\src\GetState\GetState.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Jobs\src\Closure\DebugName.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Jobs\src\LState\LBASE.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>
