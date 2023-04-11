@@ -9,15 +9,20 @@ void Dumper::JobsHandler::register_jobs()
 	// INDIPENDENTS JOBS
 	register_job("Misc", dump_misc);
 	register_job("Taskscheduler", dump_taskscheduler);
-	register_job("LTypeName", dump_ltypename);
 	register_job("SCResume", dump_scresume);
 	register_job("lua_openbase", dump_lua_openbase);
 	register_job("TaskDefer", dump_taskdefer);
-	register_job("ScriptState", dump_getstate, {
-		{"scriptstate", dump_scriptstate}
-	});
 	register_job("Printf", dump_printf);
 	register_job("lbase", dump_lbase);
+
+	register_job("ScriptState", dump_getstate, {
+		{"scriptstate", dump_scriptstate},
+		{"lgt", dump_lgt}
+	});
+
+	register_job("LTypeName", dump_ltypename, {
+		{"types", dump_types}
+	});
 
 	// DEPENDS ON SCRIPTMODULEINTERNAL & VMLOAD
 	register_job("LuaVM::Load", dump_vm_load, {

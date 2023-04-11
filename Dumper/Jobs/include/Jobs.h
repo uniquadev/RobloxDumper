@@ -8,14 +8,18 @@
 
 DEFINE_JOB(misc);
 DEFINE_JOB(taskscheduler);
-DEFINE_JOB(ltypename);
 DEFINE_JOB(scresume);
 DEFINE_JOB(lua_openbase);
 DEFINE_JOB(taskdefer);
-DEFINE_JOB(getstate);
-DEFINE_JOB(scriptstate);
 DEFINE_JOB(printf);
 DEFINE_JOB(lbase);
+
+DEFINE_JOB(getstate);
+DEFINE_JOB(scriptstate);
+DEFINE_JOB(lgt);
+
+DEFINE_JOB(ltypename);
+DEFINE_JOB(types);
 
 DEFINE_JOB(vm_load);
 DEFINE_JOB(pseudo2addr);

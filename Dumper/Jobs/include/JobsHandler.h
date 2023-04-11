@@ -35,6 +35,7 @@ namespace Dumper
 			{"addys", json::object()},
 			{"subs", json::object()},
 			{"ptrobf", json::object()},
+			{"types", json::object()},
 			{"errors", json::array()}
 		};
 
@@ -66,6 +67,10 @@ namespace Dumper
 			output["ptrobf"].push_back(
 				{name, obf}
 			);
+		}
+		void push_type(std::string name, int type)
+		{
+			output["types"][name] = type;
 		}
 		void push_error(std::string error)
 		{

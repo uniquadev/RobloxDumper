@@ -1,6 +1,7 @@
 #include "Jobs.h"
 #include "Memory.h"
 #include "MemoryUtils.h"
+#include "JobsData.h"
 using namespace Dumper;
 using namespace Memory;
 
@@ -21,6 +22,8 @@ bool dump_ltypename(JobsHandler* h)
 
 	uintptr_t lua_typename = get_offset(typename_sign[0]);
 	h->push_sub("LuaTypeName", lua_typename);
+
+	JobsData::typename_start = typename_sign[0];
 
 	return true;
 }
