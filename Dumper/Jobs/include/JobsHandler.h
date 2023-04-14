@@ -51,7 +51,7 @@ namespace Dumper
 				{"address_hex", int2hex(addy)},
 			});
 		}
-		void push_offset(std::string name, uintptr_t offset)
+		void push_offset(std::string name, int64_t offset)
 		{
 			output["offsets"][name] = offset;
 		}

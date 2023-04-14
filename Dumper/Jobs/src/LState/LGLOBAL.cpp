@@ -12,6 +12,7 @@ using JobsData::os_date_end;
 
 bool dump_lglobal(JobsHandler* h)
 {
+	// 85 ? 0F 85 ? ? ? ?
 	// 85 ? ? 85 ? ? ? ? 8D ? ?
 	// test    eax, eax
 	// jnz     loc_20D09A4
@@ -19,14 +20,21 @@ bool dump_lglobal(JobsHandler* h)
 	// deobf just after
 
 	auto sign = scan(
-		"85 ? ? 85 ? ? ? ? 8D ? ?",
+		"85 ? 0F 85 ? ? ? ?",
 		SearchSettings(os_date_start, os_date_end, PAGE_EXECUTE_READ, true, false)
 	);
 
 	if (sign.size() < 1)
 		JOBERROR(h, "Can't find sign of L->global inside os_date");
 
-	h->push_offset("L_GLOBAL", *(BYTE*)(sign[0] + 10));
+	auto imm = get_immediates(
+		SearchSettings(sign[0] + 8, sign[0] + 30, PAGE_EXECUTE_READ, true, false)
+	);
+
+	if (imm.size() < 1)
+		JOBERROR(h, "Can't find immediates after L->global sign in os_date");
+
+	h->push_offset("L_GLOBAL", imm[0]);
 	h->push_ptrobf("L_GLOBAL", PtrDeobf::get_ptrobf_type_str(sign[0] + 8));
 
 	return true;

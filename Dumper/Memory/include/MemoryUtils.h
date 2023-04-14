@@ -55,7 +55,10 @@ namespace Dumper::Memory
 	/// <summary>
 	/// Scan the process memory to find the passed signature
 	/// </summary>
-	/// <returns></returns>
 	std::vector<uintptr_t> scan(std::string sign, SearchSettings settings);
 	std::vector<uintptr_t> scan(Signature sign, SearchSettings settings);
+	/// <summary>
+	/// Search immediates values
+	/// </summary>
+	std::vector<int64_t> get_immediates(SearchSettings settings);
 }
