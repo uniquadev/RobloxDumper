@@ -87,6 +87,15 @@
     <ClCompile Include="Jobs\src\LState\LGT.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="Jobs\src\TString\TSSize.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Jobs\src\TString\TSNext.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Jobs\src\TString\TSHash.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Jobs\include\JobsHandler.h">

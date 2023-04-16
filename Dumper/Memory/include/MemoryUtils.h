@@ -61,4 +61,5 @@ namespace Dumper::Memory
 	/// Search immediates values
 	/// </summary>
 	std::vector<int64_t> get_immediates(SearchSettings settings);
+	std::vector<int64_t> get_immeoffsets(SearchSettings settings);
 }

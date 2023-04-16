@@ -10,10 +10,16 @@ void Dumper::JobsHandler::register_jobs()
 	register_job("Misc", dump_misc);
 	register_job("Taskscheduler", dump_taskscheduler);
 	register_job("SCResume", dump_scresume);
-	register_job("lua_openbase", dump_lua_openbase);
 	register_job("TaskDefer", dump_taskdefer);
 	register_job("Printf", dump_printf);
 	register_job("lbase", dump_lbase);
+
+	register_job("lua_openbase", dump_lua_openbase, {
+		{"tssize", dump_tssize, {
+			{"tsnext", dump_tsnext},
+			{"tsnext", dump_tshash}
+		}},
+	});
 
 	register_job("ScriptState", dump_getstate, {
 		{"scriptstate", dump_scriptstate},

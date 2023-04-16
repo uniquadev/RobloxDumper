@@ -198,15 +198,47 @@ std::vector<int64_t> Dumper::Memory::get_immediates(SearchSettings settings)
 		{
 			const ZydisDecodedOperand* operand = &instruction.operands[i];
 			if (operand->type == ZYDIS_OPERAND_TYPE_IMMEDIATE)
+			{
 				res.push_back((uintptr_t)(operand->imm.value.s));
-			else if (operand->type == ZYDIS_OPERAND_TYPE_MEMORY)
+				if (settings.stop_first)
+					return res;
+			}
+		}
+		offset += instruction.info.length;
+	}
+
+	return res;
+}
+
+std::vector<int64_t> Dumper::Memory::get_immeoffsets(SearchSettings settings)
+{
+	std::vector<int64_t> res = {};
+
+	ZyanU8* data = (ZyanU8*)settings.start;
+	ZyanUSize lenght = settings.end - settings.start;
+	ZyanUSize offset = 0;
+
+	ZydisDisassembledInstruction instruction;
+	while (ZYAN_SUCCESS(ZydisDisassembleIntel(
+		ZYDIS_MACHINE_MODE_LONG_COMPAT_32,
+		settings.start,
+		data + offset,
+		lenght - offset,
+		&instruction
+	)))
+	{
+		// Check if the instruction has an immediate operand
+		for (uint8_t i = 0; i < 10; ++i)
+		{
+			const ZydisDecodedOperand* operand = &instruction.operands[i];
+			if (operand->type == ZYDIS_OPERAND_TYPE_MEMORY)
 			{
 				if (!operand->mem.disp.has_displacement)
 					continue;
 				res.push_back(operand->mem.disp.value);
+				if (settings.stop_first)
+					return res;
 			}
-			if (res.size() > 0 && settings.stop_first)
-				return res;
 		}
 		offset += instruction.info.length;
 	}

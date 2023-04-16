@@ -27,7 +27,7 @@ bool dump_lglobal(JobsHandler* h)
 	if (sign.size() < 1)
 		JOBERROR(h, "Can't find sign of L->global inside os_date");
 
-	auto imm = get_immediates(
+	auto imm = get_immeoffsets(
 		SearchSettings(sign[0] + 8, sign[0] + 30, PAGE_EXECUTE_READ, true, false)
 	);
 

@@ -173,6 +173,9 @@
     <ClCompile Include="Jobs\src\LuaOpenBase.cpp" />
     <ClCompile Include="Jobs\src\OsDate.cpp" />
     <ClCompile Include="Jobs\src\Printf.cpp" />
+    <ClCompile Include="Jobs\src\TString\TSHash.cpp" />
+    <ClCompile Include="Jobs\src\TString\TSNext.cpp" />
+    <ClCompile Include="Jobs\src\TString\TSSize.cpp" />
     <ClCompile Include="Jobs\src\TypeName\Types.cpp" />
     <ClCompile Include="Jobs\src\VMLoad\Pseudo2.cpp" />
     <ClCompile Include="Jobs\src\SCResume.cpp" />

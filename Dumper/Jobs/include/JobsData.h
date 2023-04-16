@@ -17,6 +17,11 @@ namespace Dumper::JobsData
 	inline uintptr_t os_date_start;
 	inline uintptr_t os_date_end;
 
+	inline uintptr_t luaopen_base_start;
+	inline uintptr_t luaopen_base_end;
+
+	inline uintptr_t ts_version_check_start;
+
 	inline uintptr_t startscript_start;
 	inline uintptr_t startscript_end;
 	inline uintptr_t getstate;

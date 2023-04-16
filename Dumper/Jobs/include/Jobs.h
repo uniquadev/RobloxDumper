@@ -31,3 +31,7 @@ DEFINE_JOB(ltop);
 
 DEFINE_JOB(getstate);
 DEFINE_JOB(scriptstate);
+
+DEFINE_JOB(tssize);
+DEFINE_JOB(tsnext);
+DEFINE_JOB(tshash);
