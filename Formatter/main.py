@@ -19,11 +19,6 @@ FORMATTERS : list[DumpFormat] = [
 ]
 
 def load_formats() -> None:
-    # delete temp
-    if isdir("temp"):
-        rmtree("temp")
-    # make temp folder
-    makedirs("temp")
     # loop all formats
     for formatter in FORMATTERS:
         f = formatter(DUMP)

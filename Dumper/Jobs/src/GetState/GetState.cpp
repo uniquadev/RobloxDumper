@@ -23,6 +23,8 @@ bool dump_getstate(JobsHandler* h) {
 
 	JobsData::startscript_start = get_func_top(refs[0]);
 	JobsData::startscript_end = get_func_end(refs[0]);
+
+	h->push_sub("StartScript", get_offset(JobsData::startscript_start));
 	
 	auto getstate_calls = scan(
 		"E8 ? ? ? ?"" ""8B ?"" ""8D 8D ? ? ? ?"" ""68 ? ? ? ?",
