@@ -10,7 +10,7 @@ using namespace Memory;
 using JobsData::getstate;
 
 bool dump_scriptstate(JobsHandler* h) {
-	// because of multiple return statements producing multiple elilogues, get_func_end wont work here
+	// because of multiple return statements producing multiple epilogues, get_func_end wont work here
 	auto scriptstate_calls = scan(
 		"FF 75 08"" ""8B ?"" ""E8 ? ? ? ?"" ""8B ? ?",
 		SearchSettings(getstate, getstate + 0x1000, PAGE_EXECUTE_READ, true, true)

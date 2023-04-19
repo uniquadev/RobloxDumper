@@ -21,7 +21,7 @@ void Dumper::JobsHandler::register_jobs()
 		}},
 	});
 
-	register_job("ScriptState", dump_getstate, {
+	register_job("GetState", dump_getstate, {
 		{"scriptstate", dump_scriptstate},
 		{"lgt", dump_lgt}
 	});
@@ -40,10 +40,6 @@ void Dumper::JobsHandler::register_jobs()
 	register_job("os_date", dump_os_date, {
 		{"lglobal", dump_lglobal},
 		{"ltop", dump_ltop}
-	});
-
-	register_job("GetState", dump_getstate, {
-		{"scriptstate", dump_scriptstate}
 	});
 
 	// ADDONS
