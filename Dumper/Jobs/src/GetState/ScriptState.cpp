@@ -12,7 +12,7 @@ using JobsData::getstate;
 bool dump_scriptstate(JobsHandler* h) {
 	// because of multiple return statements producing multiple epilogues, get_func_end wont work here
 	auto scriptstate_calls = scan(
-		"FF 75 08"" ""8B ?"" ""E8 ? ? ? ?"" ""8B ? ?",
+		"E8 ? ? ? ? 8B ? ? 5F 5E",
 		SearchSettings(getstate, getstate + 0x1000, PAGE_EXECUTE_READ, true, true)
 	);
 	if (scriptstate_calls.size() < 1)
@@ -20,7 +20,7 @@ bool dump_scriptstate(JobsHandler* h) {
 
 	auto getstate = get_calling(scriptstate_calls[0]);
 
-	uintptr_t get_scriptstate = get_calling(scriptstate_calls[0] + 5);
+	uintptr_t get_scriptstate = get_calling(scriptstate_calls[0]);
 
 	h->push_sub("GetScriptState", get_offset(get_scriptstate));
 	
