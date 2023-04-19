@@ -8,6 +8,8 @@ from Formats.ida import IdaFormat
 from Formats.dump import DumpFormat
 
 DIR = path.join(path.dirname(path.abspath(__file__)), "../build/Release")
+TEMP = path.join(DIR, "temp")
+
 DUMP = json.load(
     open(f"{DIR}/dump.json", "r")
 )
@@ -19,10 +21,15 @@ FORMATTERS : list[DumpFormat] = [
 ]
 
 def load_formats() -> None:
+    # delete temp
+    if isdir(TEMP):
+        rmtree(TEMP)
+    # make temp folder
+    makedirs(TEMP)
     # loop all formats
     for formatter in FORMATTERS:
         f = formatter(DUMP)
-        with open(f"{DIR}/{VERSION}-{formatter.name}", "w+") as o:
+        with open(f"{TEMP}/{VERSION}-{formatter.name}", "w+") as o:
             o.write(f.src)
 
 
