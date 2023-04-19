@@ -37,7 +37,7 @@ bool dump_getstate(JobsHandler* h) {
 
 	auto getstate = get_calling(getstate_calls[0]);
 
-	h->push_sub("GetState", get_offset(getstate));
+	//h->push_sub("GetState", get_offset(getstate)); // removed as it can get people confused with the real Sc::GetStateFromIdentity sub
 	JobsData::getstate = getstate;
 
 	return true;
