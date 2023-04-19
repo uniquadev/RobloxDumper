@@ -16,6 +16,8 @@ bool dump_types(JobsHandler* h)
 	static auto rlua_typename = (rlua_typename_cconv*)(JobsData::typename_start);
     try
     {
+        std::vector<int> userdatas = {};
+        int string = 0;
         for (int i = 0; i < 10; i++)
         {
             std::string type = rlua_typename(0, i);
@@ -24,19 +26,32 @@ bool dump_types(JobsHandler* h)
             else if (type == "boolean")
                 h->push_type("LUA_TBOOLEAN", i);
             else if (type == "userdata")
-                h->push_type("LUA_TUSERDATA", i);
+                userdatas.push_back(i);
             else if (type == "number")
                 h->push_type("LUA_TNUMBER", i);
             else if (type == "vector")
                 h->push_type("LUA_TVECTOR", i);
             else if (type == "string")
+            {
+                string = i;
                 h->push_type("LUA_TSTRING", i);
+            }
             else if (type == "thread")
                 h->push_type("LUA_TTHREAD", i);
             else if (type == "function")
                 h->push_type("LUA_TFUNCTION", i);
             else if (type == "table")
                 h->push_type("LUA_TTABLE", i);
+        }
+        if (userdatas[0] < string)
+        {
+            h->push_type("LUA_LTUSERDATA", userdatas[0]);
+            h->push_type("LUA_TUSERDATA", userdatas[1]);
+        }
+        else
+        {
+            h->push_type("LUA_LTUSERDATA", userdatas[1]);
+            h->push_type("LUA_TUSERDATA", userdatas[0]);
         }
     }
     catch (...)
