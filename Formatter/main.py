@@ -3,7 +3,6 @@ import json
 from os import makedirs, path
 from os.path import isdir
 from shutil import rmtree
-from pickle import TRUE
 # formats
 from Formats.ida import IdaFormat
 from Formats.dump import DumpFormat
