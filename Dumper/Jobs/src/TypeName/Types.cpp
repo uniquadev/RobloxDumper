@@ -45,12 +45,12 @@ bool dump_types(JobsHandler* h)
         }
         if (userdatas[0] < string)
         {
-            h->push_type("LUA_LTUSERDATA", userdatas[0]);
+            h->push_type("LUA_TLIGHTUSERDATA", userdatas[0]);
             h->push_type("LUA_TUSERDATA", userdatas[1]);
         }
         else
         {
-            h->push_type("LUA_LTUSERDATA", userdatas[1]);
+            h->push_type("LUA_TLIGHTUSERDATA", userdatas[1]);
             h->push_type("LUA_TUSERDATA", userdatas[0]);
         }
     }
