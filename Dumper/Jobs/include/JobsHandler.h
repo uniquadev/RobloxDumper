@@ -41,7 +41,11 @@ namespace Dumper
 
 		std::string int2hex(uintptr_t num) {
 			std::stringstream stream;
-			stream << "0x" << std::uppercase << std::hex << num;
+			if (num & ((uintptr_t)INTPTR_MAX + 1)) { // sign bit
+				stream << "-0x" << std::uppercase << std::hex << (~num) + 1;
+			} else {
+				stream << "0x" << std::uppercase << std::hex << num;
+			}
 			return stream.str();
 		}
 		void push_addy(std::string name, uintptr_t addy)
@@ -53,7 +57,10 @@ namespace Dumper
 		}
 		void push_offset(std::string name, int64_t offset)
 		{
-			output["offsets"][name] = offset;
+			output["offsets"][name] = {
+				{"offset", offset},
+				{"offset_hex", int2hex(offset)},
+			};
 		}
 		void push_sub(std::string name, uintptr_t addy)
 		{

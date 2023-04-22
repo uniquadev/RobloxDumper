@@ -30,7 +30,7 @@ bool dump_vmload_hooks(JobsHandler* h)
 	h->push_addy("luavm_load_bytecode_hook", get_offset(decompression_end[0]));
 
 	// luavm_load stackframe
-	unsigned int bytecode_offset{}, bytecode_len_offset{}; // these will be set to disps of ebp
+	int bytecode_offset{}, bytecode_len_offset{}; // these will be set to disps of ebp
 	auto arg_pusher = scan(
 		"8B ? ? 8B ? ? ? ? ? ? ? E8 ? ? ? ? 83 C4 08",
 		SearchSettings(vmload_start, vmload_start + 0x6000, PAGE_EXECUTE_READ, true, false)
@@ -40,8 +40,8 @@ bool dump_vmload_hooks(JobsHandler* h)
 	}
 	else {
 		// edx, ecx
-		bytecode_len_offset = ((~*reinterpret_cast<unsigned int*>(arg_pusher[0] + 2)) & 0xFF) + 1; // single byte displacement
-		bytecode_offset = ~*reinterpret_cast<unsigned int*>(arg_pusher[0] + 5) + 1;
+		bytecode_len_offset = static_cast<signed int>(*reinterpret_cast<signed char*>(arg_pusher[0] + 2)); // single byte displacement
+		bytecode_offset = *reinterpret_cast<signed int*>(arg_pusher[0] + 5);
 	}
 
 	h->push_offset("luavm_load_stackframe_bytecode", bytecode_offset);
