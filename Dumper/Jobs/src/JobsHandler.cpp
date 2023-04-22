@@ -39,7 +39,8 @@ void Dumper::JobsHandler::register_jobs()
 	// DEPENDS ON os_date
 	register_job("os_date", dump_os_date, {
 		{"lglobal", dump_lglobal},
-		{"ltop", dump_ltop}
+		{"ltop", dump_ltop},
+		{"dummynode", dump_dummynode}
 	});
 
 	// ADDONS

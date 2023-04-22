@@ -28,6 +28,7 @@ DEFINE_JOB(vmload_hooks);
 DEFINE_JOB(os_date);
 DEFINE_JOB(lglobal);
 DEFINE_JOB(ltop);
+DEFINE_JOB(dummynode);
 
 DEFINE_JOB(getstate);
 DEFINE_JOB(scriptstate);

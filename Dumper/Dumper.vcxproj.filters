@@ -51,7 +51,7 @@
     <ClCompile Include="Jobs\src\LuaOpenBase.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
-    <ClCompile Include="Jobs\src\OsDate.cpp">
+    <ClCompile Include="Jobs\src\OsDate\OsDate.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="Jobs\src\LState\LGLOBAL.cpp">
@@ -94,6 +94,9 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="Jobs\src\TString\TSHash.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Jobs\src\OsDate\DummyNode.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>

@@ -171,7 +171,8 @@
     <ClCompile Include="Jobs\src\LState\LGT.cpp" />
     <ClCompile Include="Jobs\src\LState\LTOP.cpp" />
     <ClCompile Include="Jobs\src\LuaOpenBase.cpp" />
-    <ClCompile Include="Jobs\src\OsDate.cpp" />
+    <ClCompile Include="Jobs\src\OsDate\DummyNode.cpp" />
+    <ClCompile Include="Jobs\src\OsDate\OsDate.cpp" />
     <ClCompile Include="Jobs\src\Printf.cpp" />
     <ClCompile Include="Jobs\src\TString\TSHash.cpp" />
     <ClCompile Include="Jobs\src\TString\TSNext.cpp" />
