@@ -74,6 +74,8 @@ bool Dumper::JobsHandler::run()
 	stream2 << 1000.0 * (std::clock() - started_at) / CLOCKS_PER_SEC << " ms";
 	output["cputime"] = stream2.str();
 
+	output["credit"] = "Dumper created by Uniqua#6289 and plusgiant5#7930";
+
 	return errors == 0 ? true : false;
 }
 
