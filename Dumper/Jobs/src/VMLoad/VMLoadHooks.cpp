@@ -21,13 +21,13 @@ bool dump_vmload_hooks(JobsHandler* h)
 
 	// luavm_load_bytecode_hook
 	auto decompression_end = scan(
-		"8B ? ? ? ? ? 8B ? ? ? ? ? 2B ?",
+		"C3 8B ? ? ? ? ? 8B ? ? ? ? ? 2B ?", // retn is at start, add 1 to resulting matches
 		SearchSettings(vmload_start, vmload_start + 0x6000, PAGE_EXECUTE_READ, true, false)
 	);
 	if (decompression_end.size() < 1)
 		JOBERROR(h, "Could not find signature for luavm_load_bytecode_hook");
 
-	h->push_addy("luavm_load_bytecode_hook", get_offset(decompression_end[0]));
+	h->push_addy("luavm_load_bytecode_hook", get_offset(decompression_end[0] + 1));
 
 	// luavm_load stackframe
 	int bytecode_offset{}, bytecode_len_offset{}; // these will be set to disps of ebp
