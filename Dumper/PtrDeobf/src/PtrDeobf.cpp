@@ -1,3 +1,5 @@
+// This file is part of the uniquadev/RobloxDumper and is licensed under MIT License; see LICENSE.txt for details
+
 #include "PtrDeobf.h"
 #include "Zydis.h"
 
@@ -8,7 +10,6 @@ std::string Dumper::PtrDeobf::get_ptrobf_type_str(uintptr_t text_start, size_t l
 {
     return ptrobf_type_to_str(get_ptrobf_type(text_start, length));
 }
-
 
 PtrObfPosition get_ptrpos(ZydisRegister left, ZydisRegister right, uintptr_t text_start, size_t lenght)
 {
@@ -75,7 +76,7 @@ PtrObfuscationType Dumper::PtrDeobf::get_ptrobf_type(uintptr_t text_start, size_
             break;
         }
         case 0x2B: //SUB r32, r/m32
-        case 0x29:  //SUB r/m32, r32
+        case 0x29: //SUB r/m32, r32
         {
             // this opcode accept:
             // #1 sub     edx, esi
@@ -87,6 +88,7 @@ PtrObfuscationType Dumper::PtrDeobf::get_ptrobf_type(uintptr_t text_start, size_
                 return PtrObfuscationType::SUB_P_X; // *b - b
             else if (instruction.operands[1].type == ZYDIS_OPERAND_TYPE_MEMORY)
                 return PtrObfuscationType::SUB_X_P; // b - *b
+            
             // #1 case
             auto pos = get_ptrpos(
                 instruction.operands[0].reg.value,
@@ -94,6 +96,7 @@ PtrObfuscationType Dumper::PtrDeobf::get_ptrobf_type(uintptr_t text_start, size_
                 text_start,
                 offset
             );
+            
             if (pos == PtrObfPosition::LEFT)
                 return PtrObfuscationType::SUB_P_X;
             else if (pos == PtrObfPosition::RIGHT)
@@ -117,6 +120,8 @@ PtrObfuscationType Dumper::PtrDeobf::get_ptrobf_type(uintptr_t text_start, size_
         default:
             break;
         }
+
+        // next instruction
         offset += instruction.info.length;
     }
     

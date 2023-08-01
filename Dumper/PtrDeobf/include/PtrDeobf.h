@@ -1,16 +1,20 @@
+// This file is part of the uniquadev/RobloxDumper and is licensed under MIT License; see LICENSE.txt for details
+
 #pragma once
+
 #include <cstdint>
 #include <string>
 
 enum PtrObfuscationType
 {
-	ADD, // (obj + off) + *(uintptr_t*)(obj + off)
-	SUB_P_X, // *(uintptr_t*)(obj + off) - (obj + off)
-	SUB_X_P, // (obj + off) - *(uintptr_t*)(obj + off)
-	XOR, // (obj + off) ^ *(uintptr_t*)(obj + off)
-	NONE_TYPE // *(uintptr_t*)(obj + off)
+	ADD,		// (obj + off) + *(uintptr_t*)(obj + off)
+	SUB_P_X,	// *(uintptr_t*)(obj + off) - (obj + off)
+	SUB_X_P,	// (obj + off) - *(uintptr_t*)(obj + off)
+	XOR,		// (obj + off) ^ *(uintptr_t*)(obj + off)
+	NONE_TYPE	// *(uintptr_t*)(obj + off)
 };
 
+// SUB_P_X or SUB_X_P
 enum PtrObfPosition
 {
 	LEFT,

@@ -1,3 +1,5 @@
+// This file is part of the uniquadev/RobloxDumper and is licensed under MIT License; see LICENSE.txt for details
+
 #pragma once
 
 #include <windows.h>
@@ -23,6 +25,12 @@ namespace Dumper::Memory
 	void init();
 	std::filesystem::path get_dll_dir(HMODULE dllModule);
 
-	std::vector<MEMORY_BASIC_INFORMATION>  get_regions(uintptr_t addr = 0, DWORD protect = PAGE_EXECUTE_READWRITE, uintptr_t end = 0);
+	/*
+	* utils
+	*/
+
+	// retrive committed regions starting from addr to end_addr with the right protection flag
+	std::vector<MEMORY_BASIC_INFORMATION>  get_regions(uintptr_t addr = 0, DWORD protect = PAGE_EXECUTE_READWRITE, uintptr_t end_addr = 0);
+	// retrive addr region only if committed
 	std::optional<MEMORY_BASIC_INFORMATION> get_region(uintptr_t addr);
 }

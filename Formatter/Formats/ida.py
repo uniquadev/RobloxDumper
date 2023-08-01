@@ -1,5 +1,6 @@
-from .dump import DumpFormat, DUMPEDWITH, DUMPDATE
+# This file is part of the uniquadev/RobloxDumper and is licensed under MIT License; see LICENSE.txt for details
 
+from .dump import DumpFormat, DUMPEDWITH, DUMPDATE
 
 class IdaFormat(DumpFormat):
     name = "ida.py"

@@ -1,3 +1,5 @@
+// This file is part of the uniquadev/RobloxDumper and is licensed under MIT License; see LICENSE.txt for details
+
 #include <windows.h>
 #include <winuser.h>
 #include <fstream>
@@ -9,7 +11,7 @@
 
 int WINAPI main_thread(HMODULE hThread)
 {
-	Dumper::Memory::init();
+	Dumper::Memory::init(); // setup memory library
 	
 	auto jh = new Dumper::JobsHandler;
 	jh->register_jobs();

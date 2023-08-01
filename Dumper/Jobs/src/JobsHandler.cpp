@@ -1,3 +1,5 @@
+// This file is part of the uniquadev/RobloxDumper and is licensed under MIT License; see LICENSE.txt for details
+
 #include "JobsHandler.h"
 #include "Jobs.h"
 #include "Memory.h"
@@ -15,29 +17,34 @@ void Dumper::JobsHandler::register_jobs()
 	register_job("lbase", dump_lbase);
 
 	register_job("lua_openbase", dump_lua_openbase, {
+		// DEPENDS ON lua_openbase
 		{"tssize", dump_tssize, {
+			// DEPENDS ON tssize
 			{"tsnext", dump_tsnext},
 			{"tsnext", dump_tshash}
 		}},
 	});
 
 	register_job("GetState", dump_getstate, {
+		// DEPENDS ON GetState
 		{"scriptstate", dump_scriptstate},
 		{"lgt", dump_lgt}
 	});
 
 	register_job("LTypeName", dump_ltypename, {
+		// DEPENDS ON LTypeName
 		{"types", dump_types}
 	});
 
-	// DEPENDS ON SCRIPTMODULEINTERNAL & VMLOAD
+	
 	register_job("LuaVM::Load", dump_vm_load, {
+		// DEPENDS ON SCRIPTMODULEINTERNAL & VMLOAD
 		{"pseudo2addr", dump_pseudo2addr},
 		{"vmload_hooks", dump_vmload_hooks}
 	});
 
-	// DEPENDS ON os_date
 	register_job("os_date", dump_os_date, {
+		// DEPENDS ON os_date
 		{"lglobal", dump_lglobal},
 		{"ltop", dump_ltop},
 		{"dummynode", dump_dummynode}

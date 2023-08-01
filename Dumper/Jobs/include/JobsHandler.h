@@ -1,3 +1,5 @@
+// This file is part of the uniquadev/RobloxDumper and is licensed under MIT License; see LICENSE.txt for details
+
 #pragma once
 
 #include <vector>

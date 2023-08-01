@@ -1,6 +1,6 @@
+// This file is part of the uniquadev/RobloxDumper and is licensed under MIT License; see LICENSE.txt for details
 
 // idea: since we dumped luaopen_base we can try to look fro pushclosure of xpcall
-// by reversing I found
 /*
 	// 3 ptrobf in a row make them harder to be deobfuscated without a decompiler
 	*(_DWORD *)(v351 + 0x10) = (char *)sub_20A4600 + v351 + 0x10;

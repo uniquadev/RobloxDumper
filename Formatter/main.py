@@ -1,12 +1,17 @@
+# This file is part of the uniquadev/RobloxDumper and is licensed under MIT License; see LICENSE.txt for details
+# Run this script to create custom dump formats from the dump.json
+
 # imports
 import json
 from os import makedirs, path
 from os.path import isdir
 from shutil import rmtree
+
 # formats
 from Formats.ida import IdaFormat
 from Formats.dump import DumpFormat
 
+# locate folders
 DIR = path.join(path.dirname(path.abspath(__file__)), "../build/Release")
 TEMP = path.join(DIR, "temp")
 

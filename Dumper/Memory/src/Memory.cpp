@@ -1,3 +1,5 @@
+// This file is part of the uniquadev/RobloxDumper and is licensed under MIT License; see LICENSE.txt for details
+
 #include "Memory.h"
 
 #include <string>
@@ -15,6 +17,8 @@ void Dumper::Memory::init()
     WORD nsections = nt_header->FileHeader.NumberOfSections;
     PIMAGE_SECTION_HEADER section = IMAGE_FIRST_SECTION(nt_header);
     size_t total_size = 0;
+
+    // retrive sections location
     for (WORD i = 0; i < nsections; i++)
     {
         std::string name = (char*)&section->Name;
@@ -57,7 +61,7 @@ std::filesystem::path Dumper::Memory::get_dll_dir(HMODULE dllModule)
     return std::filesystem::path(std::wstring(Path)).parent_path();
 }
 
-std::vector<MEMORY_BASIC_INFORMATION> Dumper::Memory::get_regions(uintptr_t addr, DWORD protect, uintptr_t end)
+std::vector<MEMORY_BASIC_INFORMATION> Dumper::Memory::get_regions(uintptr_t addr, DWORD protect, uintptr_t end_addr)
 {
     auto res = std::vector<MEMORY_BASIC_INFORMATION>();
     MEMORY_BASIC_INFORMATION mbi;
@@ -66,7 +70,7 @@ std::vector<MEMORY_BASIC_INFORMATION> Dumper::Memory::get_regions(uintptr_t addr
     for (auto addr = scan; VirtualQuery((LPCVOID)addr, &mbi, sizeof(mbi)) != 0;
         addr = reinterpret_cast<uintptr_t>(mbi.BaseAddress) + mbi.RegionSize)
     {
-        if (end && addr > end)
+        if (end_addr && addr > end_addr)
             break;
         if (mbi.State == MEM_COMMIT && (mbi.Protect & protect))
             res.push_back(mbi);
@@ -84,15 +88,16 @@ std::vector<MEMORY_BASIC_INFORMATION> Dumper::Memory::get_regions(uintptr_t addr
             res[0].BaseAddress = (PVOID)addr;
             res[0].RegionSize = (base + size) - addr;
         }
+
         // adjust last region to end at the right end address
         const auto last = res.back();
-        if (end != 0 && ((uintptr_t)(last.BaseAddress) + last.RegionSize) > end)
+        if (end_addr != 0 && ((uintptr_t)(last.BaseAddress) + last.RegionSize) > end_addr)
         {
             const auto region = res.back();
             uintptr_t base = (uintptr_t)region.BaseAddress;
             auto size = region.RegionSize;
 
-            res.back().RegionSize = end - base;
+            res.back().RegionSize = end_addr - base;
         }
     }
     

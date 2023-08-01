@@ -1,14 +1,18 @@
-#include <iostream>
+// This file is part of the uniquadev/RobloxDumper and is licensed under MIT License; see LICENSE.txt for details
 
 #include "Process.h"
+#include <filesystem>
 
-__forceinline DWORD InjectLL(const HANDLE Proc, const std::string Path)
+/*
+* simple ExRemoteThread injection method
+*/
+DWORD InjectLL(const HANDLE Proc, const char* Path)
 {
 	const auto Loc = VirtualAllocEx(Proc, 0, MAX_PATH, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
 	if (Loc == nullptr)
 		return 4003;
 
-	if (!WriteProcessMemory(Proc, (LPVOID)Loc, Path.c_str(), Path.size() + 1, 0))
+	if (!WriteProcessMemory(Proc, (LPVOID)Loc, Path, MAX_PATH, 0))
 		return 4004;
 
 	const auto Thread = CreateRemoteThread(Proc, 0, 0, (LPTHREAD_START_ROUTINE)LoadLibraryA, Loc, 0, 0);
@@ -31,13 +35,14 @@ std::filesystem::path GetBinPath()
 	return std::filesystem::path(Buffer).parent_path();
 }
 
+
 int main()
 {
 	auto dll = GetBinPath() / "Dumper.dll";
 
 	if (!std::filesystem::exists(dll))
 	{
-		std::cout << "Make sure to compile dll first 8,)" << std::endl;
+		std::cout << "Make sure to compile dll" << std::endl;
 		return 404;
 	}
 
@@ -46,5 +51,5 @@ int main()
 		ac = Process::ByName(L"RobloxPlayerBeta.exe");
 
 	
-	InjectLL(ac->ph, dll.string());
+	InjectLL(ac->ph, dll.string().c_str());
 }

@@ -1,6 +1,9 @@
+// This file is part of the uniquadev/RobloxDumper and is licensed under MIT License; see LICENSE.txt for details
+
 #include "Jobs.h"
 #include "Memory.h"
 #include "MemoryUtils.h"
+
 using namespace Dumper;
 using namespace Memory;
 

@@ -1,5 +1,6 @@
-import datetime
+# This file is part of the uniquadev/RobloxDumper and is licensed under MIT License; see LICENSE.txt for details
 
+import datetime
 
 DUMPEDWITH = "Dumped with HydraDumper | Discord Uniqua#6289"
 DUMPDATE = "Dumped at " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
