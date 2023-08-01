@@ -1,0 +1,154 @@
+{
+    "addys": {
+        "JmpEsi": {
+            "address": 275822,
+            "address_hex": "0x4356E"
+        },
+        "RobloxModule": {
+            "address": 3604480,
+            "address_hex": "0x370000"
+        },
+        "TaskSchedulerSingleton": {
+            "address": 65735392,
+            "address_hex": "0x3EB0AE0"
+        },
+        "dummynode": {
+            "address": 39522336,
+            "address_hex": "0x25B1020"
+        },
+        "inline_luau_load": {
+            "address": 3513778,
+            "address_hex": "0x359DB2"
+        },
+        "luavm_load_bytecode_hook": {
+            "address": 3523973,
+            "address_hex": "0x35C585"
+        },
+        "luavm_load_hashcheck_hook": {
+            "address": 3525864,
+            "address_hex": "0x35CCE8"
+        },
+        "nilObject": {
+            "address": 39522368,
+            "address_hex": "0x25B1040"
+        }
+    },
+    "cputime": "246 ms",
+    "credit": "Dumper created by Uniqua#6289 and plusgiant5#7930",
+    "errors": [],
+    "offsets": {
+        "L_BASE": {
+            "offset": 16,
+            "offset_hex": "0x10"
+        },
+        "L_GLOBAL": {
+            "offset": 12,
+            "offset_hex": "0xC"
+        },
+        "L_GT": {
+            "offset": 64,
+            "offset_hex": "0x40"
+        },
+        "L_TOP": {
+            "offset": 8,
+            "offset_hex": "0x8"
+        },
+        "SC_SCRIPTSTATE": {
+            "offset": 244,
+            "offset_hex": "0xF4"
+        },
+        "TS_ATOM": {
+            "offset": 4,
+            "offset_hex": "0x4"
+        },
+        "TS_DATA": {
+            "offset": 20,
+            "offset_hex": "0x14"
+        },
+        "TS_HASH": {
+            "offset": 12,
+            "offset_hex": "0xC"
+        },
+        "TS_NEXT": {
+            "offset": 8,
+            "offset_hex": "0x8"
+        },
+        "TS_SIZE": {
+            "offset": 16,
+            "offset_hex": "0x10"
+        },
+        "luavm_load_stackframe_bytecode": {
+            "offset": -348,
+            "offset_hex": "-0x15C"
+        },
+        "luavm_load_stackframe_bytecode_len": {
+            "offset": -108,
+            "offset_hex": "-0x6C"
+        }
+    },
+    "ptrobf": {
+        "L_GLOBAL": "XOR",
+        "SC_SCRIPTSTATE": "SUB_P_X",
+        "TS_HASH": "XOR",
+        "TS_SIZE": "ADD"
+    },
+    "subs": {
+        "GetScriptState": {
+            "address": 3805120,
+            "address_hex": "0x3A0FC0"
+        },
+        "GetTaskScheduler": {
+            "address": 7572672,
+            "address_hex": "0x738CC0"
+        },
+        "LuaTypeName": {
+            "address": 22450752,
+            "address_hex": "0x1569240"
+        },
+        "LuaVM::Load": {
+            "address": 3513248,
+            "address_hex": "0x359BA0"
+        },
+        "Printf": {
+            "address": 13539776,
+            "address_hex": "0xCE99C0"
+        },
+        "ScriptContextResume": {
+            "address": 4064624,
+            "address_hex": "0x3E0570"
+        },
+        "StartScript": {
+            "address": 4065248,
+            "address_hex": "0x3E07E0"
+        },
+        "TaskDefer": {
+            "address": 4063008,
+            "address_hex": "0x3DFF20"
+        },
+        "luaopen_base": {
+            "address": 22572384,
+            "address_hex": "0x1586D60"
+        },
+        "os_date": {
+            "address": 22735872,
+            "address_hex": "0x15AEC00"
+        },
+        "pseudo2addr": {
+            "address": 22447680,
+            "address_hex": "0x1568640"
+        }
+    },
+    "types": {
+        "LUA_TBOOLEAN": 1,
+        "LUA_TFUNCTION": 6,
+        "LUA_TLIGHTUSERDATA": 4,
+        "LUA_TNIL": 0,
+        "LUA_TNUMBER": 3,
+        "LUA_TSTRING": 5,
+        "LUA_TTABLE": 9,
+        "LUA_TTHREAD": 7,
+        "LUA_TUSERDATA": 8,
+        "LUA_TVECTOR": 2
+    },
+    "version": "version-31b938635c234124"
+}
