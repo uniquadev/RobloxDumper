@@ -1,7 +1,7 @@
 # RobloxDumper x86
  
 * uniq
-* ([@plusgiant5](https://github.com/plusgiant5))
+* [@plusgiant5](https://github.com/plusgiant5)
 
 ### Roblox offsets dumper
 This project includes a simple DLL injector, memory libraries, dumps formatter and usefull informations to study Roblox's internals.
