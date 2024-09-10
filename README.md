@@ -1,8 +1,10 @@
 # RobloxDumper x86
+ 
+* uniq
+* ([@plusgiant5](https://github.com/plusgiant5))
 
-In response to the release of the new Roblox [Hyperion](https://devforum.roblox.com/t/welcoming-byfron-to-roblox/2018233) Antitamper system, we decided ([@plusgiant5](https://github.com/plusgiant5)) to comment and share the source code of our old windows Roblox client dumper. This project includes a simple DLL injector, memory libraries, dumps formatter and tons of usefull informations to study Roblox's internals.
-
-Our aim is to help developers understand how to automate dumping processes and gain insights into the techniques employed by the old Roblox client to protect its codebase.
+### Roblox offsets dumper
+This project includes a simple DLL injector, memory libraries, dumps formatter and usefull informations to study Roblox's internals.
 
 ### Example dump
 [04-27-2023.json](Examples/04-27-2023.json)
@@ -10,7 +12,7 @@ Our aim is to help developers understand how to automate dumping processes and g
 <img src="https://github.com/uniquadev/RobloxDumper/blob/main/Examples/19-04-23.png?raw=true" width="450" height="450" />
 
 ## Motivation
-The motivation behind this project is to provide the community with valuable resources for studying Roblox's internals. By open-sourcing the code and sharing useful information, we hope to foster a better understanding of the platform's security mechanisms and inspire further research in this area.
+Our aim is to help developers understand how to automate dumping processes and gain insights into the techniques employed by the old Roblox client to protect its codebase.
 
 ## Building
 This project is built using Visual Studio. You can download it [here](https://visualstudio.microsoft.com/downloads/).
@@ -20,5 +22,3 @@ The project is configured to automatically attach a debugger to the Roblox proce
 
 ## License
 This project is licensed under the MIT License, allowing for open use and distribution while maintaining the original copyright notice.
-
-*Thank you for showing interest in our project. Happy studying and happy Roblox development! If you have any questions or need assistance, don't hesitate to reach out.*
